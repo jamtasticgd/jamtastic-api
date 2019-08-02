@@ -1,0 +1,56 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.1-node-browsers
+        environment:
+            RAILS_ENV: test
+      - image: circleci/postgres:9
+
+    working_directory: ~/jamtastic
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - jamtastic-{{ .Branch }}{{ checksum "Gemfile.lock" }}
+
+      - run:
+          name: install dependencies
+          command: |
+            bundle install --without development \
+                           --deployment \
+                           --jobs=3 \
+                           --retry=3
+
+      - save_cache:
+          key: jamtastic-{{ .Branch }}{{ checksum "Gemfile.lock" }}
+          paths:
+            - ./vendor/bundle
+
+      # Database setup
+      - run: cp .env.example .env
+      - run: bundle exec rake db:create
+
+      # run tests!
+      - run:
+          name: run tests
+          command: |
+            mkdir /tmp/test-results
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | \
+              circleci tests split --split-by=timings)"
+
+            bundle exec rspec \
+              --format progress \
+              --profile 10 \
+              --out /tmp/test-results/rspec.xml \
+              --format progress \
+              $TEST_FILES
+
+      # collect reports
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: test-results
