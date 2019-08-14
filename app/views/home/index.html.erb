@@ -1,1 +1,31 @@
-Jamtastic
+<div class="hero home-header-hero">
+  <div class="title">
+     <%= t('home.info.name') %>
+  </div>
+  <div class="subtitle">
+     <%= t('home.info.description') %>
+  </div>
+</div>
+
+<div class="box">
+  <nav class="level">
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading"><%= t('home.dashboard.members_count') %></p>
+        <p class="title"><%= members_count %></p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading"><%= t('home.dashboard.jams_count') %></p>
+        <p class="title"><%= game_jams_count %></p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading"><%= t('home.dashboard.games_count') %></p>
+        <p class="title"><%= games_count %></p>
+      </div>
+    </div>
+  </nav>
+</div>

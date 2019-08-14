@@ -5,15 +5,42 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag asset_path('favicon.png') %>
   </head>
-
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class="navbar is-link">
+      <div class="navbar-brand">
+        <%= link_to 'Jamtastic', root_path, class: "navbar-item is-size-4" %>
 
-    <%= yield %>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <div class="navbar-menu">
+        <div class="navbar-end">
+          <%= link_to t('menu.home'), root_path, class: "navbar-item active" %>
+          <%= link_to t('menu.jams'), root_path, class: "navbar-item" %>
+          <%= link_to t('menu.contact'), root_path, class: "navbar-item" %>
+
+          <div class="navbar-item">
+            <%= link_to t('menu.login'), new_user_session_path, class: "button is-primary" %>
+          </div>
+
+          <div class="navbar-item">
+            <%= link_to t('menu.register'), new_user_registration_path, class: "button is-light" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="section is-fullheight is-fullwidth">
+      <%= yield %>
+    </section>
   </body>
 </html>
