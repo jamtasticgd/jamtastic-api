@@ -17,5 +17,9 @@ module Jamtastic
     # the framework and any gems in your application.
     config.i18n.default_locale = 'pt-BR'
     config.i18n.locale = 'pt-BR'
+
+    Raven.configure do |config|
+      config.dsn = ENV['SENTRY_DSN']
+    end
   end
 end
