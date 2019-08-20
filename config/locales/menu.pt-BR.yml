@@ -1,7 +1,8 @@
 pt-BR:
   menu:
     home: "Início"
-    jams: "Jams"
-    contact: "Contato"
+    games: "Jogos"
+    events: "Eventos"
+    jobs: "Vagas"
     login: "Login"
-    register: "Registro"
+    logo_alt: "Logo do projeto contendo a palavra Jamtastic escrita"

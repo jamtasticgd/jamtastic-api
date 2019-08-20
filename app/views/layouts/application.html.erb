@@ -14,9 +14,9 @@
   <body>
     <div class="navbar is-link">
       <div class="navbar-brand">
-        <%= link_to 'Jamtastic', root_path, class: "navbar-item is-size-4" %>
+        <%= link_to image_tag("jamtastic-logo-white-transparent.png", border: 0, alt: t('menu.logo_alt')), root_path, class: "navbar-item is-size-4" %>
 
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');">
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
           <span aria-hidden="true"></span>
@@ -26,15 +26,12 @@
       <div class="navbar-menu">
         <div class="navbar-end">
           <%= link_to t('menu.home'), root_path, class: "navbar-item active" %>
-          <%= link_to t('menu.jams'), root_path, class: "navbar-item" %>
-          <%= link_to t('menu.contact'), root_path, class: "navbar-item" %>
+          <%= link_to t('menu.games'), root_path, class: "navbar-item" %>
+          <%= link_to t('menu.events'), root_path, class: "navbar-item" %>
+          <%= link_to t('menu.jobs'), root_path, class: "navbar-item" %>
 
           <div class="navbar-item">
             <%= link_to t('menu.login'), new_user_session_path, class: "button is-primary" %>
-          </div>
-
-          <div class="navbar-item">
-            <%= link_to t('menu.register'), new_user_registration_path, class: "button is-light" %>
           </div>
         </div>
       </div>
