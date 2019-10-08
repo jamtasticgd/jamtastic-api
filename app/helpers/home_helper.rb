@@ -3,7 +3,7 @@ module HomeHelper
   #
   # Returns an Integer value.
   def members_count
-    Group.pluck(:member_count).reduce(:+)
+    Group.sum(:member_count)
   end
 
   # Public: Returns how many game jams event we were involved.
