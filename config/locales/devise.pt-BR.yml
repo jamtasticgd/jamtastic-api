@@ -35,28 +35,26 @@ pt-BR:
       unconfirmed: Antes de continuar, confirme a sua conta.
       deleted_account: A sua conta está desativada.
     mailer:
-      invitation_instructions:
-        subject: 'Instruções do convite'
-        hello: 'Olá %{email}'
-        someone_invited_you: 'Alguém convidou você para acessar %{url}, você pode aceitar o convite através do link abaixo.'
-        accept: 'Aceitar convite'
-        ignore: "Se você não quer aceitar esse convite, por favor ignore esse e-mail.<br />Sua conta não será criada até você acessar o link abaixo e escolher sua senha."
       confirmation_instructions:
         action: Confirmar minha conta
         greeting: Bem-vindo %{recipient}!
         instruction: 'Você pode confirmar sua conta através do link abaixo:'
         subject: Instruções de confirmação
+      email_changed:
+        greeting: Olá %{recipient}!
+        message: Estamos entrando em contato para notificá-lo de que seu e-mail está sendo alterado para %{email}.
+        subject: E-mail alterado
       password_change:
-        greeting:
-        message:
-        subject:
+        greeting: Olá %{recipient}!
+        message: Estamos entrando em contato para notificá-lo de que sua senha foi alterada.
+        subject: Senha alterada
       reset_password_instructions:
         action: Redefinir minha senha
         greeting: Olá %{recipient}!
         instruction: Alguém fez o pedido para redefinir sua senha, e você pode fazer isso clicando no link abaixo.
         instruction_2: Se você não fez este pedido, por favor ignore este e-mail.
-        instruction_3: Sua senha não será alterada até que você acesse o link abaixo e crie uma nova.
-        subject: Instruções de reinicialização de senha
+        instruction_3: Sua senha não será alterada até que você acesse o link acima e crie uma nova.
+        subject: Instruções de redefinição de senha
       unlock_instructions:
         action: Desbloquear minha conta
         greeting: Olá %{recipient}!
