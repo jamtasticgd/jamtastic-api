@@ -7,5 +7,6 @@ feature 'Visit the home page' do
     visit root_path
 
     expect(page).to have_content('Jamtastic')
+    expect(page).to have_content('Uma comunidade de desenvolvimento de jogos brasileira.')
   end
 end

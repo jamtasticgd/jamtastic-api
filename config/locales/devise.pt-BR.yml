@@ -74,6 +74,7 @@ pt-BR:
         change_your_password: Alterar sua senha
         confirm_new_password: Confirme sua nova senha
         new_password: Nova senha
+        minimum_password_length: Mínimo de %{length} caracteres
       new:
         forgot_your_password: Esqueceu sua senha?
         send_me_reset_password_instructions: Enviar instruções para redefinição da senha
@@ -90,11 +91,13 @@ pt-BR:
         currently_waiting_confirmation_for_email: 'No momento esperando por: %{email}'
         leave_blank_if_you_don_t_want_to_change_it: deixe em branco caso não queira alterá-la
         title: Editar %{resource}
-        unhappy: Não está contente
+        unhappy: Não está contente?
         update: Atualizar
         we_need_your_current_password_to_confirm_your_changes: precisamos da sua senha atual para confirmar suas mudanças
+        minimum_password_length: Mínimo de %{length} caracteres
       new:
         sign_up: Inscrever-se
+        minimum_password_length: Mínimo de %{length} caracteres
       signed_up: Bem vindo! Você realizou seu registro com sucesso.
       signed_up_but_inactive: Você se inscreveu com sucesso, porém nós não podemos autenticá-lo porque sua conta ainda não foi ativada.
       signed_up_but_locked: Você se inscreveu com sucesso. Porém nós não podemos autenticá-lo porque sua conta está bloqueada.
