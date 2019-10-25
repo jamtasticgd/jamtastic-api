@@ -31,7 +31,11 @@
           <%= link_to t('menu.jobs'), root_path, class: "navbar-item" %>
 
           <div class="navbar-item">
-            <%= link_to t('menu.login'), new_user_session_path, class: "button is-primary" %>
+            <% if user_signed_in? %>
+              <%= link_to t('menu.logout'), destroy_user_session_path, method: :delete, class: "button is-danger" %>
+            <% else %>
+              <%= link_to t('menu.login'), new_user_session_path, class: "button is-primary" %>
+            <% end %>
           </div>
         </div>
       </div>
