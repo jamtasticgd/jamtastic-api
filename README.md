@@ -1,24 +1,13 @@
-# README
+# Jamtastic
+Jamtastic is a Brazilian game development initiative founded in 2016, creating a safe place for everyone that seeks to practice game developing.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Our goal is to promote game development to everyone, no matter where they are coming from.
 
-Things you may want to cover:
+We are currently organizing online game jams and maintaining a [community on Telegram](https://t.me/jamtasticgd).
 
-* Ruby version
+## Hub
+By creating this hub for our community, we aim to:
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Share the awesome games done by them;
+-
+-
