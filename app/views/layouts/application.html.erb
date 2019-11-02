@@ -41,6 +41,8 @@
       </div>
     </div>
     <section class="section is-fullheight is-fullwidth">
+      <%= render 'layouts/notification', content: notice, color: 'is-info' %>
+      <%= render 'layouts/notification', content: alert, color: 'is-danger' %>
       <%= yield %>
     </section>
   </body>
