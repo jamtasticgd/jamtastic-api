@@ -4,15 +4,6 @@ require 'rails_helper'
 require 'faker'
 
 feature 'Sign up an user' do
-  it 'renders the sign up page' do
-    visit root_path
-
-    click_on 'Login'
-    click_on 'Inscrever-se'
-
-    expect(page).to have_content('Inscrever-se')
-  end
-
   context 'when all valid data is informed' do
     it 'creates a new user account' do
       visit root_path
