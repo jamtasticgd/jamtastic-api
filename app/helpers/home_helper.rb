@@ -3,7 +3,9 @@ module HomeHelper
   #
   # Returns an Integer value.
   def members_count
-    Group.sum(:member_count)
+    Rails.cache.fetch(:member_count, expires_in: 10.minutes) do
+      Group.sum(:member_count)
+    end
   end
 
   # Public: Returns how many game jams event we were involved.
