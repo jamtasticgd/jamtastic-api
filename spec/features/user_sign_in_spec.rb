@@ -28,20 +28,20 @@ feature 'Sign in an user' do
         after { travel_back }
 
         it 'logins sucessfully' do
-        user = users(:unconfirmed_user)
-        password = '123456'
+          user = users(:unconfirmed_user)
+          password = '123456'
 
-        visit root_path
+          visit root_path
 
-        click_on 'Login'
+          click_on 'Login'
 
-        fill_in 'user[email]', with: user.email
-        fill_in 'user[password]', with: password
+          fill_in 'user[email]', with: user.email
+          fill_in 'user[password]', with: password
 
-        click_on 'Log in'
+          click_on 'Log in'
 
-        expect(page).to have_content('Login efetuado com sucesso.')
-      end
+          expect(page).to have_content('Login efetuado com sucesso.')
+        end
       end
     end
 
