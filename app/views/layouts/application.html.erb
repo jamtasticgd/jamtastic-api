@@ -25,11 +25,6 @@
 
       <div class="navbar-menu">
         <div class="navbar-end">
-          <%= link_to t('menu.home'), root_path, class: "navbar-item active" %>
-          <%= link_to t('menu.games'), root_path, class: "navbar-item" %>
-          <%= link_to t('menu.events'), root_path, class: "navbar-item" %>
-          <%= link_to t('menu.jobs'), root_path, class: "navbar-item" %>
-
           <div class="navbar-item">
             <% if user_signed_in? %>
               <%= link_to t('menu.logout'), destroy_user_session_path, method: :delete, class: "button is-danger" %>

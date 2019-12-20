@@ -1,9 +1,5 @@
 pt-BR:
   menu:
-    home: "Início"
-    games: "Jogos"
-    events: "Eventos"
-    jobs: "Vagas"
     login: "Login"
     logout: "Sair"
     logo_alt: "Logo do projeto contendo a palavra Jamtastic escrita"
