@@ -1,0 +1,14 @@
+<table class="table is-fullwidth">
+  <thead>
+    <th><%= Company.human_attribute_name(:name) %></th>
+    <th><%= Company.human_attribute_name(:url) %></th>
+  </thead>
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= company.name %></td>
+        <td><%= link_to company.url %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

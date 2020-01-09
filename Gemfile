@@ -6,6 +6,7 @@ ruby '2.6.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bulma-rails', '~> 0.7.5'
 gem 'devise', '~> 4.7.1'
+gem 'font-awesome-sass', '~> 5.12.0'
 gem 'jbuilder', '~> 2.5'
 gem 'newrelic_rpm', '~> 6.5.0'
 gem 'pg', '>= 0.18', '< 2.0'
