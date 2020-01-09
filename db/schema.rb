@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_01_02_170647) do
     t.string "logo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_companies_on_name", unique: true
   end
 
   create_table "groups", force: :cascade do |t|
