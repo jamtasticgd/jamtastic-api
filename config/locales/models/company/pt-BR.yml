@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      company:
+        one: Empresa
+        other: Empresas
+    attributes:
+      company:
+        name: Nome
+        email: E-mail
+        facebook: Facebook
+        twitter: Twitter
+        url: Site
+        logo: Logo
