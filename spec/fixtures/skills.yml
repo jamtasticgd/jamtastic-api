@@ -1,0 +1,10 @@
+art:
+  code: 'art'
+audio:
+  code: 'audio'
+code:
+  code: 'code'
+game_design:
+  code: 'game_design'
+writing:
+  code: 'writing'

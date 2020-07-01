@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   namespace :api, format: :json do
     resources :groups, only: [:update]
     resources :companies, only: [:create]
+    resources :skills, only: [:index]
   end
 end
