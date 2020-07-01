@@ -62,6 +62,7 @@ GEM
       io-like (~> 0.3.0)
     bcrypt (3.1.13)
     bindex (0.8.1)
+    blueprinter (0.23.4)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     builder (3.2.4)
@@ -254,6 +255,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  blueprinter
   bootsnap (>= 1.1.0)
   bulma-rails (~> 0.7.5)
   byebug (~> 11.0.1)
