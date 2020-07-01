@@ -15,12 +15,12 @@ FileUtils.chdir APP_ROOT do
 
   puts "\n== Copying sample files =="
   unless File.exist?('config/database.yml')
-    cp 'config/database.yml.sample', 'config/database.yml'
+    FileUtils.cp 'config/database.yml.sample', 'config/database.yml'
   end
 
   puts "\n== Copying .env file =="
   unless File.exist?('.env')
-    FileUtils.symlink '.env.example', '.env'
+    FileUtils.cp '.env.example', '.env'
   end
 
   puts "\n== Preparing database =="
