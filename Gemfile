@@ -3,10 +3,10 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
+gem 'blueprinter'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bulma-rails', '~> 0.7.5'
 gem 'devise', '~> 4.7.1'
-gem 'blueprinter'
 gem 'font-awesome-sass', '~> 5.12.0'
 gem 'jbuilder', '~> 2.5'
 gem 'newrelic_rpm', '~> 6.5.0'
