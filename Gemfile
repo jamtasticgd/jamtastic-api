@@ -7,6 +7,7 @@ gem 'blueprinter'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bulma-rails', '~> 0.7.5'
 gem 'devise', '~> 4.7.1'
+gem 'devise_token_auth'
 gem 'font-awesome-sass', '~> 5.12.0'
 gem 'jbuilder', '~> 2.5'
 gem 'newrelic_rpm', '~> 6.5.0'

@@ -123,6 +123,10 @@ pt-BR:
       send_instructions: Dentro de minutos, você receberá um email com instruções de desbloqueio da sua conta.
       send_paranoid_instructions: Se sua conta existir em nosso banco de dados, você receberá em breve um email com instruções para desbloquear ela.
       unlocked: A sua conta foi desbloqueada com sucesso. Você está autenticado.
+  devise_token_auth:
+    confirmations:
+      user_not_found: Se o seu email existir em nosso banco de dados, você receberá um email com instruções sobre como confirmar sua conta em alguns minutos.
+      sended: Se o seu email existir em nosso banco de dados, você receberá um email com instruções sobre como confirmar sua conta em alguns minutos.
   errors:
     messages:
       already_confirmed: já foi confirmado
