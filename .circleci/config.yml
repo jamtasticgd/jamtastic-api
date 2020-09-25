@@ -7,7 +7,7 @@ jobs:
             RAILS_ENV: test
       - image: circleci/postgres:12.3
         environment:
-          POSTGRES_USER: jamtastic
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: password
 
     working_directory: ~/jamtastic
