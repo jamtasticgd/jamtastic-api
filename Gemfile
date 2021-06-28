@@ -19,7 +19,7 @@ gem 'sass-rails', '~> 6.0'
 gem 'sentry-raven', '~> 3.1.2'
 gem 'turbolinks', '~> 5.2.1'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier', '4.2.0'
 
 group :development, :test do
   gem 'byebug', '~> 11.0.1'
