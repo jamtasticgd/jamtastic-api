@@ -15,7 +15,7 @@ gem 'pg', '~> 1.2.3'
 gem 'puma', '~> 5.3.2'
 gem 'rack-cors'
 gem 'rails', '~> 6.0.4'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 gem 'sentry-raven', '~> 3.1.2'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
