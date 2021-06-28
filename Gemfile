@@ -30,7 +30,7 @@ end
 
 group :development do
   gem 'listen', '~> 3.5.1'
-  gem 'web-console', '>= 3.3.0'
+  gem 'web-console', '~> 4.1.0'
 end
 
 group :test do

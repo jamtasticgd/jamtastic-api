@@ -253,7 +253,7 @@ GEM
       execjs (>= 0.3.0, < 3)
     warden (1.2.9)
       rack (>= 2.0.9)
-    web-console (4.0.1)
+    web-console (4.1.0)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
@@ -295,7 +295,7 @@ DEPENDENCIES
   turbolinks (~> 5.2.1)
   tzinfo-data
   uglifier (= 4.2.0)
-  web-console (>= 3.3.0)
+  web-console (~> 4.1.0)
 
 RUBY VERSION
    ruby 2.6.5p114
