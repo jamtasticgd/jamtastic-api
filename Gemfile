@@ -17,7 +17,7 @@ gem 'rack-cors'
 gem 'rails', '~> 6.0.4'
 gem 'sass-rails', '~> 6.0'
 gem 'sentry-raven', '~> 3.1.2'
-gem 'turbolinks', '~> 5'
+gem 'turbolinks', '~> 5.2.1'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'uglifier', '>= 1.3.0'
 
