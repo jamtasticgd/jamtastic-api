@@ -5,7 +5,7 @@ ruby '2.6.5'
 
 gem 'blueprinter', '~> 0.25.3'
 gem 'bootsnap', '~> 1.7.5', require: false
-gem 'bulma-rails', '~> 0.7.5'
+gem 'bulma-rails', '~> 0.9.1'
 gem 'devise', '~> 4.7.1'
 gem 'devise_token_auth', '~> 1.1.5'
 gem 'font-awesome-sass', '~> 5.12.0'
