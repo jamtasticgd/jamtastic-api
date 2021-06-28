@@ -1,0 +1,6 @@
+pt-BR:
+  dry_validation:
+    errors:
+      key?: não foi informado(a)
+      str?: não é um texto
+      filled?: não foi informado(a)
