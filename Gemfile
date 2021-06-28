@@ -22,9 +22,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'uglifier', '4.2.0'
 
 group :development, :test do
-  gem 'byebug', '~> 11.0.1'
   gem 'dotenv-rails', '~> 2.7.6'
-  gem 'pry-byebug', '~> 3.7.0'
+  gem 'pry-byebug', '~> 3.9.0'
   gem 'pry-rails', '~> 0.3.9'
   gem 'rspec-rails', '~> 5.0.1'
 end
