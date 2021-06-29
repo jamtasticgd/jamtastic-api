@@ -4,34 +4,42 @@ require 'rails_helper'
 
 RSpec.describe 'Skills', type: :request do
   context 'when some skills exist' do
-    it 'returns the skills' do
+    it 'returns an ok status' do
       get api_skills_path
 
       expect(response).to have_http_status(:ok)
-      expect(response.parsed_body.size).to eq(5)
     end
 
-    it 'return the skill code' do
+    it 'returns the skills' do
       get api_skills_path
 
-      art_skill = response.parsed_body.first
-
-      expect(art_skill).to match(
-        a_hash_including(
-          'code' => 'art'
-        )
+      expect(response.parsed_body).to match(
+        [
+          { 'code' => 'art' },
+          { 'code' => 'audio' },
+          { 'code' => 'code' },
+          { 'code' => 'game_design' },
+          { 'code' => 'writing' }
+        ]
       )
     end
   end
 
   context 'when no skills exist' do
-    it 'retuns an empty json' do
+    before do
       Skill.delete_all
+    end
 
+    it 'returns an ok status' do
       get api_skills_path
 
       expect(response).to have_http_status(:ok)
-      expect(response.parsed_body).to be_empty
+    end
+
+    it 'retuns an empty json' do
+      get api_skills_path
+
+      expect(response.parsed_body).to match([])
     end
   end
 end
