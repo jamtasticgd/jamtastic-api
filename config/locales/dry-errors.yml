@@ -3,4 +3,5 @@ pt-BR:
     errors:
       key?: não foi informado(a)
       str?: não é um texto
+      int?: não é um inteiro
       filled?: não foi informado(a)
