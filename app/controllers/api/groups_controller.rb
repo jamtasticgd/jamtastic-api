@@ -8,19 +8,19 @@ module Api
     skip_before_action :verify_authenticity_token, only: :update
 
     def update
-      group = Group.find_by!(name: permitted_params[:id])
+      contract_result = validate_params(Groups::UpdateContract)
 
-      if group.update(member_count: permitted_params[:member_count])
-        head :ok
+      if contract_result.success?
+        group = Group.find_by!(name: contract_result[:id])
+
+        if group.update(member_count: contract_result[:member_count])
+          head :ok
+        else
+          render(json: Models::ErrorsSerializer.new(company), status: :unprocessable_entity)
+        end
       else
-        render(json: { errors: group.errors }, status: :unprocessable_entity)
+        render(json: Contracts::ErrorsSerializer.new(contract_result), status: :unprocessable_entity)
       end
-    end
-
-    private
-
-    def permitted_params
-      params.permit([:id, :member_count])
     end
   end
 end

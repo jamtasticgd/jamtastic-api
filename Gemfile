@@ -8,6 +8,7 @@ gem 'bootsnap', '~> 1.7.5', require: false
 gem 'bulma-rails', '~> 0.9.1'
 gem 'devise', '~> 4.8.0'
 gem 'devise_token_auth', '~> 1.1.5'
+gem 'dry-validation', '~> 1.6.0'
 gem 'font-awesome-sass', '~> 5.15.1'
 gem 'jbuilder', '~> 2.11.2'
 gem 'newrelic_rpm', '~> 7.1.0'

@@ -6,26 +6,19 @@ module Api
     skip_before_action :verify_authenticity_token, only: :update
 
     def create
-      company = Company.new(permitted_params)
+      contract_result = validate_params(Companies::CreateContract)
 
-      if company.save
-        head :ok
+      if contract_result.success?
+        company = Company.new(contract_result.to_h)
+
+        if company.save
+          render(json: CompaniesSerializer.render(company), status: :created)
+        else
+          render(json: Models::ErrorsSerializer.new(company), status: :unprocessable_entity)
+        end
       else
-        render(json: { errors: company.errors }, status: :unprocessable_entity)
+        render(json: Contracts::ErrorsSerializer.new(contract_result), status: :unprocessable_entity)
       end
-    end
-
-    private
-
-    def permitted_params
-      params.permit([
-        :name,
-        :email,
-        :facebook,
-        :twitter,
-        :url,
-        :logo
-      ])
     end
   end
 end

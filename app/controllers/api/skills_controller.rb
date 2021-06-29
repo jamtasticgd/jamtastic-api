@@ -5,7 +5,7 @@ module Api
     def index
       skills = Skill.all
 
-      render json: SkillBlueprint.render_as_json(skills)
+      render json: SkillsSerializer.render(skills)
     end
   end
 end
