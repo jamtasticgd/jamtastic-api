@@ -12,7 +12,7 @@ module Api
         company = Company.new(contract_result.to_h)
 
         if company.save
-          head :ok
+          render(json: CompaniesSerializer.render(company), status: :created)
         else
           render(json: Models::ErrorsSerializer.new(company), status: :unprocessable_entity)
         end
