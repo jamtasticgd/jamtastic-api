@@ -25,3 +25,11 @@ Company.create_with(
 ).find_or_create_by(
   name: 'An indie game studio'
 )
+
+BASIC_SKILLS = ['art', 'audio', 'code', 'game_design', 'writing']
+
+BASIC_SKILLS.each do |skill|
+  Skill.find_or_create_by(
+    code: skill
+  )
+end
