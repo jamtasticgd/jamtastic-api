@@ -6,13 +6,23 @@ RSpec.describe 'Groups', type: :request do
   describe 'update a group member count' do
     context 'when the given group exist' do
       context 'and all correct params are given' do
-        it 'updates a group' do
+        it 'returns the updated group' do
           params = { member_count: 330 }
 
           put api_group_path('telegram'), params: params
-          group = groups(:telegram)
 
-          expect(group.member_count).to be(330)
+          expect(response.parsed_body).to include(
+            'name' => 'telegram',
+            'member_count' => 330
+          )
+        end
+
+        it 'returns a success' do
+          params = { member_count: 330 }
+
+          put api_group_path('telegram'), params: params
+
+          expect(response).to have_http_status(:ok)
         end
       end
 
@@ -45,6 +55,7 @@ RSpec.describe 'Groups', type: :request do
     context 'when the given group does not exist' do
       it 'returns a not found error' do
         params = { member_count: 330 }
+
         put api_group_path('inexistent_group'), params: params
 
         expect(response).to have_http_status(:not_found)

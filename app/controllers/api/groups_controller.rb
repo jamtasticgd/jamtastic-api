@@ -11,9 +11,9 @@ module Api
         group = Group.find_by!(name: contract_result[:id])
 
         if group.update(member_count: contract_result[:member_count])
-          head :ok
+          render(json: GroupsSerializer.render(group), status: :ok)
         else
-          render(json: Models::ErrorsSerializer.new(company), status: :unprocessable_entity)
+          render(json: Models::ErrorsSerializer.new(group), status: :unprocessable_entity)
         end
       else
         render(json: Contracts::ErrorsSerializer.new(contract_result), status: :unprocessable_entity)
