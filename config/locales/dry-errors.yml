@@ -2,6 +2,8 @@ pt-BR:
   dry_validation:
     errors:
       key?: não foi informado(a)
+      array?: não é vetor
       str?: não é um texto
       int?: não é um inteiro
+      bool?: não é um booleano
       filled?: não foi informado(a)
