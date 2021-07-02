@@ -1,5 +1,9 @@
 module Contracts
   class ErrorsSerializer
+    def self.render(contract)
+      new(contract)
+    end
+
     def initialize(contract)
       @contract = contract
     end

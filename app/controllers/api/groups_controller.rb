@@ -13,10 +13,10 @@ module Api
         if group.update(member_count: contract_result[:member_count])
           render(json: GroupsSerializer.render(group), status: :ok)
         else
-          render(json: Models::ErrorsSerializer.new(group), status: :unprocessable_entity)
+          render(json: Models::ErrorsSerializer.render(group), status: :unprocessable_entity)
         end
       else
-        render(json: Contracts::ErrorsSerializer.new(contract_result), status: :unprocessable_entity)
+        render(json: Contracts::ErrorsSerializer.render(contract_result), status: :unprocessable_entity)
       end
     end
   end

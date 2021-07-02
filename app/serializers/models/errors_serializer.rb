@@ -1,5 +1,9 @@
 module Models
   class ErrorsSerializer
+    def self.render(model)
+      new(model)
+    end
+
     def initialize(model)
       @model = model
     end

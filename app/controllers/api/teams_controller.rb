@@ -16,10 +16,10 @@ module Api
         if team.persisted?
           render(json: TeamsSerializer.render(team), status: :created)
         else
-          render(json: Models::ErrorsSerializer.new(team), status: :unprocessable_entity)
+          render(json: Models::ErrorsSerializer.render(team), status: :unprocessable_entity)
         end
       else
-        render(json: Contracts::ErrorsSerializer.new(contract_result), status: :unprocessable_entity)
+        render(json: Contracts::ErrorsSerializer.render(contract_result), status: :unprocessable_entity)
       end
     end
   end

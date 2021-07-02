@@ -11,10 +11,10 @@ module Api
         if company.save
           render(json: CompaniesSerializer.render(company), status: :created)
         else
-          render(json: Models::ErrorsSerializer.new(company), status: :unprocessable_entity)
+          render(json: Models::ErrorsSerializer.render(company), status: :unprocessable_entity)
         end
       else
-        render(json: Contracts::ErrorsSerializer.new(contract_result), status: :unprocessable_entity)
+        render(json: Contracts::ErrorsSerializer.render(contract_result), status: :unprocessable_entity)
       end
     end
   end
