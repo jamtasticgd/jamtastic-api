@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  class CompaniesController < ApplicationController
-    # TODO: Add JWT authentication
-    skip_before_action :verify_authenticity_token, only: :update
-
+  class CompaniesController < Api::ApplicationController
     def create
       contract_result = validate_params(Companies::CreateContract)
 

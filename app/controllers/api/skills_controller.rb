@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  class SkillsController < ApplicationController
+  class SkillsController < Api::ApplicationController
     def index
       skills = Skill.all
 

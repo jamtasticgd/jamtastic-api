@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 module Api
-  class TeamsController < ApplicationController
-    include DeviseTokenAuth::Concerns::SetUserByToken
-
+  class TeamsController < Api::ApplicationController
     before_action :authenticate_user!
 
     def create
