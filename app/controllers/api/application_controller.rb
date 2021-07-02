@@ -2,7 +2,7 @@ module Api
   class ApplicationController < ::ApplicationController
     include DeviseTokenAuth::Concerns::SetUserByToken
 
-    skip_before_action :verify_authenticity_token, if: :devise_controller?
+    skip_before_action :verify_authenticity_token
 
     private
 
