@@ -2,10 +2,10 @@
 
 module Api
   class TeamsController < Api::ApplicationController
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only: [:create]
 
     def create
-      contract_result = validate_params(Teams::CreateContract)
+      contract_result = validate_params(::Teams::CreateContract)
 
       if contract_result.success?
         team = CreateTeam.new(
@@ -21,6 +21,12 @@ module Api
       else
         render(json: Contracts::ErrorsSerializer.render(contract_result), status: :unprocessable_entity)
       end
+    end
+
+    def index
+      teams = Team.order(:created_at)
+
+      render(json: TeamsSerializer.render(teams), status: :ok)
     end
   end
 end
