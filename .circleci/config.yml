@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.6.5-node-browsers
+      - image: circleci/ruby:2.6.7-node-browsers
         environment:
             RAILS_ENV: test
       - image: circleci/postgres:12.3
