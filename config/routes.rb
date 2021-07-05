@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :companies, only: [:create]
     resources :skills, only: [:index]
     resources :teams, only: [:create, :index] do
-      resources :members, only: [:create], module: :teams
+      resources :members, only: [:create], module: :teams, path: :join
     end
   end
 end
