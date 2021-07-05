@@ -2,7 +2,7 @@ unconfirmed_user:
   encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
   confirmation_sent_at: 01/01/2019
   email: unconfirmed@jamtastic.org
-  name: Confirmed user
+  name: Unconfirmed user
   uid: unconfirmed@jamtastic.org
 
 confirmed_user:
@@ -10,5 +10,5 @@ confirmed_user:
   confirmation_sent_at: 01/01/2019
   email: confirmed@jamtastic.org
   uid: confirmed@jamtastic.org
-  name: Unconfirmed user
+  name: Confirmed user
   confirmed_at: 01/01/2019

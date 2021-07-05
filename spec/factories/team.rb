@@ -5,5 +5,9 @@ FactoryBot.define do
     approve_new_members { false }
 
     user
+
+    trait :approve_new_members do
+      approve_new_members { true }
+    end
   end
 end

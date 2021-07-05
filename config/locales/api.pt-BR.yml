@@ -1,0 +1,5 @@
+pt-BR:
+  api:
+    team_members:
+      errors:
+        already_a_member: Já faz parte desse time.
