@@ -3,7 +3,7 @@
 require 'rails_helper'
 require 'faker'
 
-feature 'Sign up an user' do
+describe 'Sign up an user', type: :feature do
   context 'when all valid data is informed' do
     it 'creates a new user account' do
       visit root_path

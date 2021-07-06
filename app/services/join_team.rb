@@ -13,11 +13,7 @@ class JoinTeam
 
     approved = !team.approve_new_members
 
-    team_member = TeamMember.create(
-      approved: approved,
-      team: team,
-      user: user,
-    )
+    TeamMember.create(approved: approved, team: team, user: user)
   end
 
   private

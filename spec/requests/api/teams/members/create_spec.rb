@@ -34,11 +34,11 @@ RSpec.describe 'Join a team', type: :request do
           post api_team_members_path(team), headers: authentication_headers
 
           expect(response.parsed_body).to include(
-            "team" => a_hash_including(
-              "id" => team.id,
+            'team' => a_hash_including(
+              'id' => team.id
             ),
-            "user" => a_hash_including(
-              "name" => 'Confirmed user'
+            'user' => a_hash_including(
+              'name' => 'Confirmed user'
             )
           )
         end

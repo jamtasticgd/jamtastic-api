@@ -19,7 +19,7 @@ gem 'rails', '~> 6.1.4'
 gem 'sass-rails', '~> 6.0'
 gem 'sentry-raven', '~> 3.1.2'
 gem 'turbolinks', '~> 5.2.1'
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'uglifier', '4.2.0'
 
 group :development, :test do
@@ -31,6 +31,10 @@ end
 
 group :development do
   gem 'listen', '~> 3.5.1'
+  gem 'rubocop', '~> 0.92.0', require: false
+  gem 'rubocop-performance', '~> 1.8.1', require: false
+  gem 'rubocop-rails', '~> 2.8.1', require: false
+  gem 'rubocop-rspec', '~> 1.44.1', require: false
   gem 'web-console', '~> 4.1.0'
 end
 

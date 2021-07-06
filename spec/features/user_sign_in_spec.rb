@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-feature 'Sign in an user' do
+describe 'Sign in an user', type: :feature do
   context 'when user data is informed correctly' do
     context 'and it is an unconfirmed user' do
       context 'and it is past the uncofirmed access period' do
@@ -25,6 +25,7 @@ feature 'Sign in an user' do
 
       context 'and it is within the unconfirmed access period' do
         before { travel_to Time.zone.local(2019, 1, 1) }
+
         after { travel_back }
 
         it 'logins sucessfully' do

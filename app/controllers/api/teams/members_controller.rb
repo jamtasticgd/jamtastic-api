@@ -3,7 +3,9 @@ module Api
     class MembersController < Api::ApplicationController
       rescue_from ActiveRecord::RecordNotFound, with: -> { head :not_found }
       rescue_from JoinTeam::AlreadyAMember do
-        render(json: ErrorSerializer.render(t('api.team_members.errors.already_a_member')), status: :unprocessable_entity)
+        error_message = t('api.team_members.errors.already_a_member')
+
+        render(json: ErrorSerializer.render(error_message), status: :unprocessable_entity)
       end
 
       before_action :authenticate_user!
@@ -13,11 +15,7 @@ module Api
 
         if contract_result.success?
           team = Team.find(contract_result[:team_id])
-
-          team_member = JoinTeam.new(
-            user: current_user,
-            team: team
-          ).call
+          team_member = JoinTeam.new(user: current_user, team: team).call
 
           if team_member.persisted?
             render(json: TeamMembersSerializer.render(team_member), status: :created)

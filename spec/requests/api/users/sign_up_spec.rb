@@ -21,9 +21,9 @@ RSpec.describe 'Sign up a user', type: :request do
     end
 
     it 'creates a new user' do
-      expect do
+      expect {
         post(api_user_registration_path, params: params)
-      end.to change(User, :count).by(1)
+      }.to change(User, :count).by(1)
     end
 
     it 'creates a new user with the given email' do
@@ -50,24 +50,27 @@ RSpec.describe 'Sign up a user', type: :request do
       expect(user.telegram).to eq('adam.sandler')
     end
 
-    it 'sends an confirmation e-mail to the user' do
-      expect do
-        post(api_user_registration_path, params: params)
-      end.to change(ActionMailer::Base.deliveries, :count).by(1)
+    it 'sends an e-mail to the user' do
+      post(api_user_registration_path, params: params)
 
       message = ActionMailer::Base.deliveries.last
 
       expect(message.to.join).to eq('adam@sandler.com')
+    end
+
+    it 'sends the confirmation instructions to the user' do
+      post(api_user_registration_path, params: params)
+
+      message = ActionMailer::Base.deliveries.last
+
       expect(message.subject).to eq('Instruções de confirmação')
     end
   end
 
-  context 'when the user does not exist' do
-    before do
-      post(api_user_registration_path, params: params)
-    end
-
+  context 'when the user does exist' do
     it 'returns an unprocessable entity error' do
+      post(api_user_registration_path, params: params)
+
       post(api_user_registration_path, params: params)
 
       expect(response).to have_http_status(:unprocessable_entity)

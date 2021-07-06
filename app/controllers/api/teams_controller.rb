@@ -8,10 +8,7 @@ module Api
       contract_result = validate_params(::Teams::CreateContract)
 
       if contract_result.success?
-        team = CreateTeam.new(
-          user: current_user,
-          params: contract_result.to_h
-        ).call
+        team = CreateTeam.new(user: current_user, params: contract_result.to_h).call
 
         if team.persisted?
           render(json: TeamsSerializer.render(team), status: :created)

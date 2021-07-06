@@ -8,6 +8,6 @@ class ErrorSerializer
   end
 
   def as_json(_options = nil)
-    { errors: [ @message ] }
+    { errors: [@message] }
   end
 end
