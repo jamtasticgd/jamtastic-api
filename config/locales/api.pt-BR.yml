@@ -1,5 +1,5 @@
 pt-BR:
   api:
-    team_members:
+    enrollments:
       errors:
         already_a_member: Já faz parte desse time.

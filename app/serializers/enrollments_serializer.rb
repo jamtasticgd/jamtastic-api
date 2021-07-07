@@ -1,4 +1,4 @@
-class TeamMembersSerializer < Blueprinter::Base
+class EnrollmentsSerializer < Blueprinter::Base
   identifier :id
 
   fields :created_at, :updated_at

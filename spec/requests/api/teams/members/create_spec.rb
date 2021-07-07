@@ -23,7 +23,7 @@ RSpec.describe 'Join a team', type: :request do
         it 'returns a success' do
           team = create(:team)
 
-          post api_team_members_path(team), headers: authentication_headers
+          post api_team_enrollments_path(team), headers: authentication_headers
 
           expect(response).to have_http_status(:created)
         end
@@ -31,7 +31,7 @@ RSpec.describe 'Join a team', type: :request do
         it 'returns the team member data' do
           team = create(:team)
 
-          post api_team_members_path(team), headers: authentication_headers
+          post api_team_enrollments_path(team), headers: authentication_headers
 
           expect(response.parsed_body).to include(
             'team' => a_hash_including(
@@ -47,18 +47,18 @@ RSpec.describe 'Join a team', type: :request do
       context 'and the user is already part of the team' do
         it 'returns an unprocessable entity error' do
           team = create(:team)
-          post api_team_members_path(team), headers: authentication_headers
+          post api_team_enrollments_path(team), headers: authentication_headers
 
-          post api_team_members_path(team), headers: authentication_headers
+          post api_team_enrollments_path(team), headers: authentication_headers
 
           expect(response).to have_http_status(:unprocessable_entity)
         end
 
         it 'returns the error message' do
           team = create(:team)
-          post api_team_members_path(team), headers: authentication_headers
+          post api_team_enrollments_path(team), headers: authentication_headers
 
-          post api_team_members_path(team), headers: authentication_headers
+          post api_team_enrollments_path(team), headers: authentication_headers
 
           expect(response.parsed_body).to match(
             {
@@ -71,7 +71,7 @@ RSpec.describe 'Join a team', type: :request do
 
     context 'and the team does not exists' do
       it 'returns a not found error' do
-        post api_team_members_path('inexistent_team_id'), headers: authentication_headers
+        post api_team_enrollments_path('inexistent_team_id'), headers: authentication_headers
 
         expect(response).to have_http_status(:not_found)
       end
@@ -82,7 +82,7 @@ RSpec.describe 'Join a team', type: :request do
     it 'returns an unauthorized error' do
       team = create(:team)
 
-      post api_team_members_path(team)
+      post api_team_enrollments_path(team)
 
       expect(response).to have_http_status(:unauthorized)
     end
@@ -90,7 +90,7 @@ RSpec.describe 'Join a team', type: :request do
     it 'returns the error message' do
       team = create(:team)
 
-      post api_team_members_path(team)
+      post api_team_enrollments_path(team)
 
       expect(response.parsed_body).to match(
         {
