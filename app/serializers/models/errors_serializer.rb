@@ -18,7 +18,7 @@ module Models
       @model.errors.messages.map do |field, messages|
         {
           field: field.to_s,
-          detail: messages.join('')
+          detail: messages.join
         }
       end
     end
