@@ -15,14 +15,12 @@ RSpec.describe 'List teams', type: :request do
     it 'returns an array containing the teams' do
       get(api_teams_path)
 
-      expect(response.parsed_body).to match(
-        [
-          a_hash_including(
-            'name' => 'Happy Madison Productions',
-            'description' => 'We are a team making great games and movies.',
-            'needed_skills' => []
-          )
-        ]
+      expect(response.parsed_body).to include(
+        a_hash_including(
+          'name' => 'Happy Madison Productions',
+          'description' => 'We are a team making great games and movies.',
+          'needed_skills' => []
+        )
       )
     end
 
@@ -35,12 +33,16 @@ RSpec.describe 'List teams', type: :request do
 
   context 'when there are no teams registered' do
     it 'returns an ok status' do
+      Team.destroy_all
+
       get(api_teams_path)
 
       expect(response).to have_http_status(:ok)
     end
 
     it 'returns an empty array' do
+      Team.destroy_all
+
       get(api_teams_path)
 
       expect(response.parsed_body).to match([])

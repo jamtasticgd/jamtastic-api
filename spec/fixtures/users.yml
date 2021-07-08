@@ -12,3 +12,35 @@ confirmed_user:
   uid: confirmed@jamtastic.org
   name: Confirmed user
   confirmed_at: 01/01/2019
+
+billy_madison:
+  encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
+  confirmation_sent_at: 01/01/2019
+  email: billy.madison@jamtastic.org
+  uid: billy.madison@jamtastic.org
+  name: Billy Madison
+  confirmed_at: 01/01/2019
+
+zohan_dvir:
+  encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
+  confirmation_sent_at: 01/01/2019
+  email: zohan.dvir@jamtastic.org
+  uid: zohan.dvir@jamtastic.org
+  name: Zohan Dvir
+  confirmed_at: 01/01/2019
+
+happy_gilmore:
+  encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
+  confirmation_sent_at: 01/01/2019
+  email: happy.gilmore@jamtastic.org
+  uid: happy.gilmore@jamtastic.org
+  name: Happy Gilmore
+  confirmed_at: 01/01/2019
+
+lenny_feder:
+  encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
+  confirmation_sent_at: 01/01/2019
+  email: lenny_feder@jamtastic.org
+  uid: lenny_feder@jamtastic.org
+  name: Lenny Feder
+  confirmed_at: 01/01/2019

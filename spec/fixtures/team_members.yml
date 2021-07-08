@@ -1,0 +1,14 @@
+approved_member:
+  user: zohan_dvir
+  team: team_with_moderation
+  approved: true
+
+pending_member:
+  user: billy_madison
+  team: team_with_moderation
+  approved: false
+
+billy_madison:
+  user: happy_gilmore
+  team: team_without_moderation
+  approved: true

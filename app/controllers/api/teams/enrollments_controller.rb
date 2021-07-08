@@ -26,6 +26,20 @@ module Api
           render(json: Contracts::ErrorsSerializer.render(contract_result), status: :unprocessable_entity)
         end
       end
+
+      def destroy
+        contract_result = validate_params(::Teams::Enrollments::DestroyContract)
+
+        if contract_result.success?
+          team = current_user.teams.find(contract_result[:team_id])
+          team_member = team.team_members.find(contract_result[:id])
+          team_member.destroy!
+
+          head :no_content
+        else
+          render(json: Contracts::ErrorsSerializer.render(contract_result), status: :unprocessable_entity)
+        end
+      end
     end
   end
 end

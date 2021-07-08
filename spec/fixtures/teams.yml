@@ -1,0 +1,11 @@
+team_with_moderation:
+  approve_new_members: true
+  description: We are a team making great games and movies.
+  name: Happy Madison Productions
+  user: confirmed_user
+
+team_without_moderation:
+  approve_new_members: false
+  description: We are a team making great games and movies.
+  name: Happy Madison Productions
+  user: unconfirmed_user
