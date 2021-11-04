@@ -1,5 +1,7 @@
 module Users
   class ConfirmationsController < DeviseTokenAuth::ConfirmationsController
+    rescue_from ActionController::RoutingError, with: -> { head :not_found }
+
     def show
       @resource = resource_class.confirm_by_token(resource_params[:confirmation_token])
 

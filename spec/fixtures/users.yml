@@ -4,6 +4,7 @@ unconfirmed_user:
   email: unconfirmed@jamtastic.org
   name: Unconfirmed user
   uid: unconfirmed@jamtastic.org
+  confirmation_token: FyCW1VBWywocgPfcfpgn
 
 confirmed_user:
   encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
@@ -12,6 +13,7 @@ confirmed_user:
   uid: confirmed@jamtastic.org
   name: Confirmed user
   confirmed_at: 01/01/2019
+  confirmation_token: x6dRTLCoCTffpVo-AuM2
 
 billy_madison:
   encrypted_password: <%= Devise::Encryptor.digest(User, '123456') %>
