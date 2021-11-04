@@ -9,7 +9,7 @@ RSpec.describe 'Groups', type: :request do
         it 'returns the updated group' do
           params = { member_count: 330 }
 
-          put api_group_path('telegram'), params: params
+          put group_path('telegram'), params: params
 
           expect(response.parsed_body).to include(
             'name' => 'telegram',
@@ -20,7 +20,7 @@ RSpec.describe 'Groups', type: :request do
         it 'returns a success' do
           params = { member_count: 330 }
 
-          put api_group_path('telegram'), params: params
+          put group_path('telegram'), params: params
 
           expect(response).to have_http_status(:ok)
         end
@@ -30,7 +30,7 @@ RSpec.describe 'Groups', type: :request do
         it 'returns the error description' do
           params = { member_count: nil }
 
-          put api_group_path('telegram'), params: params
+          put group_path('telegram'), params: params
 
           expect(response.parsed_body).to match(
             {
@@ -45,7 +45,7 @@ RSpec.describe 'Groups', type: :request do
         it 'returns an unprocessable entity error' do
           params = { member_count: nil }
 
-          put api_group_path('telegram'), params: params
+          put group_path('telegram'), params: params
 
           expect(response).to have_http_status(:unprocessable_entity)
         end
@@ -56,7 +56,7 @@ RSpec.describe 'Groups', type: :request do
       it 'returns a not found error' do
         params = { member_count: 330 }
 
-        put api_group_path('inexistent_group'), params: params
+        put group_path('inexistent_group'), params: params
 
         expect(response).to have_http_status(:not_found)
       end

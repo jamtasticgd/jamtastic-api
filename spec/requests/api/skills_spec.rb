@@ -5,13 +5,13 @@ require 'rails_helper'
 RSpec.describe 'Skills', type: :request do
   context 'when some skills exist' do
     it 'returns an ok status' do
-      get api_skills_path
+      get skills_path
 
       expect(response).to have_http_status(:ok)
     end
 
     it 'returns the skills' do
-      get api_skills_path
+      get skills_path
 
       expect(response.parsed_body).to match(
         [
@@ -31,13 +31,13 @@ RSpec.describe 'Skills', type: :request do
     end
 
     it 'returns an ok status' do
-      get api_skills_path
+      get skills_path
 
       expect(response).to have_http_status(:ok)
     end
 
     it 'retuns an empty json' do
-      get api_skills_path
+      get skills_path
 
       expect(response.parsed_body).to match([])
     end

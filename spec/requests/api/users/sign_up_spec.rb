@@ -15,19 +15,19 @@ RSpec.describe 'Sign up a user', type: :request do
 
   context 'when the user does not exist' do
     it 'returns a success' do
-      post(api_user_registration_path, params: params)
+      post(user_registration_path, params: params)
 
       expect(response).to have_http_status(:ok)
     end
 
     it 'creates a new user' do
       expect {
-        post(api_user_registration_path, params: params)
+        post(user_registration_path, params: params)
       }.to change(User, :count).by(1)
     end
 
     it 'creates a new user with the given email' do
-      post(api_user_registration_path, params: params)
+      post(user_registration_path, params: params)
 
       user = User.find_by(email: 'adam@sandler.com')
 
@@ -35,7 +35,7 @@ RSpec.describe 'Sign up a user', type: :request do
     end
 
     it 'creates a new user with the given name' do
-      post(api_user_registration_path, params: params)
+      post(user_registration_path, params: params)
 
       user = User.find_by(email: 'adam@sandler.com')
 
@@ -43,7 +43,7 @@ RSpec.describe 'Sign up a user', type: :request do
     end
 
     it 'creates a new user with the given telegram user name' do
-      post(api_user_registration_path, params: params)
+      post(user_registration_path, params: params)
 
       user = User.find_by(email: 'adam@sandler.com')
 
@@ -51,7 +51,7 @@ RSpec.describe 'Sign up a user', type: :request do
     end
 
     it 'sends an e-mail to the user' do
-      post(api_user_registration_path, params: params)
+      post(user_registration_path, params: params)
 
       message = ActionMailer::Base.deliveries.last
 
@@ -59,7 +59,7 @@ RSpec.describe 'Sign up a user', type: :request do
     end
 
     it 'sends the confirmation instructions to the user' do
-      post(api_user_registration_path, params: params)
+      post(user_registration_path, params: params)
 
       message = ActionMailer::Base.deliveries.last
 
@@ -69,9 +69,9 @@ RSpec.describe 'Sign up a user', type: :request do
 
   context 'when the user does exist' do
     it 'returns an unprocessable entity error' do
-      post(api_user_registration_path, params: params)
+      post(user_registration_path, params: params)
 
-      post(api_user_registration_path, params: params)
+      post(user_registration_path, params: params)
 
       expect(response).to have_http_status(:unprocessable_entity)
     end

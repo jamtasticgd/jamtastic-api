@@ -8,7 +8,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
       it 'send a message to the user' do
         params = { email: 'confirmed@jamtastic.org' }
 
-        post(api_user_confirmation_path, params: params)
+        post(user_confirmation_path, params: params)
 
         message = ActionMailer::Base.deliveries.last
 
@@ -18,7 +18,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
       it 'sends the confirmation instructions to the user' do
         params = { email: 'confirmed@jamtastic.org' }
 
-        post(api_user_confirmation_path, params: params)
+        post(user_confirmation_path, params: params)
 
         message = ActionMailer::Base.deliveries.last
 
@@ -27,7 +27,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
 
       it 'returns a sucess' do
         params = { email: 'confirmed@jamtastic.org' }
-        post(api_user_confirmation_path, params: params)
+        post(user_confirmation_path, params: params)
 
         response_body = response.parsed_body
 
@@ -36,7 +36,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
 
       it 'returns a confirmation message' do
         params = { email: 'confirmed@jamtastic.org' }
-        post(api_user_confirmation_path, params: params)
+        post(user_confirmation_path, params: params)
 
         response_body = response.parsed_body
 
@@ -51,7 +51,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
       it 'sends an message to the user' do
         params = { email: 'unconfirmed@jamtastic.org' }
 
-        post(api_user_confirmation_path, params: params)
+        post(user_confirmation_path, params: params)
 
         message = ActionMailer::Base.deliveries.last
 
@@ -61,7 +61,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
       it 'sends the confirmation instructions to the user' do
         params = { email: 'unconfirmed@jamtastic.org' }
 
-        post(api_user_confirmation_path, params: params)
+        post(user_confirmation_path, params: params)
 
         message = ActionMailer::Base.deliveries.last
 
@@ -70,7 +70,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
 
       it 'returns a sucess' do
         params = { email: 'confirmed@jamtastic.org' }
-        post(api_user_confirmation_path, params: params)
+        post(user_confirmation_path, params: params)
 
         response_body = response.parsed_body
 
@@ -79,7 +79,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
 
       it 'returns a confirmation message' do
         params = { email: 'confirmed@jamtastic.org' }
-        post(api_user_confirmation_path, params: params)
+        post(user_confirmation_path, params: params)
 
         response_body = response.parsed_body
 
@@ -96,13 +96,13 @@ RSpec.describe 'Send email confirmation message', type: :request do
       params = { email: 'unknown@jamtastic.org' }
 
       expect {
-        post(api_user_confirmation_path, params: params)
+        post(user_confirmation_path, params: params)
       }.to change(ActionMailer::Base.deliveries, :count).by(0)
     end
 
     it 'returns an error' do
       params = { email: 'unknown@jamtastic.org' }
-      post(api_user_confirmation_path, params: params)
+      post(user_confirmation_path, params: params)
 
       response_body = response.parsed_body
 
@@ -111,7 +111,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
 
     it 'returns a confirmation message' do
       params = { email: 'unknown@jamtastic.org' }
-      post(api_user_confirmation_path, params: params)
+      post(user_confirmation_path, params: params)
 
       response_body = response.parsed_body
 

@@ -9,7 +9,7 @@ RSpec.describe 'Approve a team', type: :request do
         email: 'confirmed@jamtastic.org',
         password: '123456'
       }
-      post(api_user_session_path, params: params)
+      post(user_session_path, params: params)
 
       {
         uid: response.headers['uid'],
@@ -25,7 +25,7 @@ RSpec.describe 'Approve a team', type: :request do
             team = teams(:team_with_moderation)
             team_member = team_members(:pending_member)
 
-            post api_team_enrollment_approvals_path(team, team_member), headers: authentication_headers
+            post team_enrollment_approvals_path(team, team_member), headers: authentication_headers
 
             expect(response).to have_http_status(:ok)
           end
@@ -34,7 +34,7 @@ RSpec.describe 'Approve a team', type: :request do
             team = teams(:team_with_moderation)
             team_member = team_members(:pending_member)
 
-            post api_team_enrollment_approvals_path(team, team_member), headers: authentication_headers
+            post team_enrollment_approvals_path(team, team_member), headers: authentication_headers
 
             expect(response.parsed_body).to include(
               'team' => a_hash_including(
@@ -52,7 +52,7 @@ RSpec.describe 'Approve a team', type: :request do
             team = teams(:team_with_moderation)
             team_member = team_members(:approved_member)
 
-            post api_team_enrollment_approvals_path(team, team_member), headers: authentication_headers
+            post team_enrollment_approvals_path(team, team_member), headers: authentication_headers
 
             expect(response).to have_http_status(:unprocessable_entity)
           end
@@ -61,7 +61,7 @@ RSpec.describe 'Approve a team', type: :request do
             team = teams(:team_with_moderation)
             team_member = team_members(:approved_member)
 
-            post api_team_enrollment_approvals_path(team, team_member), headers: authentication_headers
+            post team_enrollment_approvals_path(team, team_member), headers: authentication_headers
 
             expect(response.parsed_body).to match(
               {
@@ -76,7 +76,7 @@ RSpec.describe 'Approve a team', type: :request do
         it 'returns a not found error' do
           team = teams(:team_with_moderation)
 
-          post api_team_enrollment_approvals_path(team, 'team_member_id'), headers: authentication_headers
+          post team_enrollment_approvals_path(team, 'team_member_id'), headers: authentication_headers
 
           expect(response).to have_http_status(:not_found)
         end
@@ -85,7 +85,7 @@ RSpec.describe 'Approve a team', type: :request do
 
     context 'and the team does not exist' do
       it 'returns a not found error' do
-        post api_team_enrollment_approvals_path('team_id', 'team_member_id'), headers: authentication_headers
+        post team_enrollment_approvals_path('team_id', 'team_member_id'), headers: authentication_headers
 
         expect(response).to have_http_status(:not_found)
       end
@@ -94,13 +94,13 @@ RSpec.describe 'Approve a team', type: :request do
 
   context 'when the authorization info is not informed' do
     it 'returns an unauthorized error' do
-      post api_team_enrollment_approvals_path('team_id', 'team_member_id')
+      post team_enrollment_approvals_path('team_id', 'team_member_id')
 
       expect(response).to have_http_status(:unauthorized)
     end
 
     it 'returns the error message' do
-      post api_team_enrollment_approvals_path('team_id', 'team_member_id')
+      post team_enrollment_approvals_path('team_id', 'team_member_id')
 
       expect(response.parsed_body).to match(
         {

@@ -1,9 +1,8 @@
 pt-BR:
-  api:
-    approvals:
-      errors:
-        already_approved: Já está aprovado.
+  approvals:
+    errors:
+      already_approved: Já está aprovado.
 
-    enrollments:
-      errors:
-        already_a_member: Já faz parte desse time.
+  enrollments:
+    errors:
+      already_a_member: Já faz parte desse time.

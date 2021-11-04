@@ -9,7 +9,7 @@ RSpec.describe 'Sign out a user', type: :request do
         email: 'confirmed@jamtastic.org',
         password: '123456'
       }
-      post(api_user_session_path, params: params)
+      post(user_session_path, params: params)
 
       headers = {
         uid: response.headers['uid'],
@@ -17,7 +17,7 @@ RSpec.describe 'Sign out a user', type: :request do
         'access-token': response.headers['access-token']
       }
 
-      delete(destroy_api_user_session_path, headers: headers)
+      delete(destroy_user_session_path, headers: headers)
 
       expect(response).to have_http_status(:ok)
     end
@@ -27,7 +27,7 @@ RSpec.describe 'Sign out a user', type: :request do
         email: 'confirmed@jamtastic.org',
         password: '123456'
       }
-      post(api_user_session_path, params: params)
+      post(user_session_path, params: params)
 
       headers = {
         uid: response.headers['uid'],
@@ -35,7 +35,7 @@ RSpec.describe 'Sign out a user', type: :request do
         'access-token': response.headers['access-token']
       }
 
-      delete(destroy_api_user_session_path, headers: headers)
+      delete(destroy_user_session_path, headers: headers)
 
       expect(response.parsed_body['success']).to eq(true)
     end
@@ -49,7 +49,7 @@ RSpec.describe 'Sign out a user', type: :request do
         'access-token': '5x2J83hTFK8zK_yri-sXiA'
       }
 
-      delete(destroy_api_user_session_path, headers: headers)
+      delete(destroy_user_session_path, headers: headers)
 
       expect(response).to have_http_status(:not_found)
     end
@@ -61,7 +61,7 @@ RSpec.describe 'Sign out a user', type: :request do
         'access-token': '5x2J83hTFK8zK_yri-sXiA'
       }
 
-      delete(destroy_api_user_session_path, headers: headers)
+      delete(destroy_user_session_path, headers: headers)
 
       expect(response.parsed_body['success']).to eq(false)
     end

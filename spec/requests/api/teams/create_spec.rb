@@ -9,7 +9,7 @@ RSpec.describe 'Create a team', type: :request do
         email: 'confirmed@jamtastic.org',
         password: '123456'
       }
-      post(api_user_session_path, params: params)
+      post(user_session_path, params: params)
 
       {
         uid: response.headers['uid'],
@@ -27,7 +27,7 @@ RSpec.describe 'Create a team', type: :request do
           needed_skills: []
         }
 
-        post api_teams_path, params: params, headers: authentication_headers
+        post teams_path, params: params, headers: authentication_headers
 
         expect(response).to have_http_status(:created)
       end
@@ -40,7 +40,7 @@ RSpec.describe 'Create a team', type: :request do
           needed_skills: []
         }
 
-        post api_teams_path, params: params, headers: authentication_headers
+        post teams_path, params: params, headers: authentication_headers
 
         expect(response.parsed_body).to include(
           'name' => 'Happy Madison Productions',
@@ -52,13 +52,13 @@ RSpec.describe 'Create a team', type: :request do
 
     context 'and the params are not informed' do
       it 'returns an unprocessable entity status code' do
-        post api_teams_path, params: {}, headers: authentication_headers
+        post teams_path, params: {}, headers: authentication_headers
 
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'returns the error message' do
-        post api_teams_path, params: {}, headers: authentication_headers
+        post teams_path, params: {}, headers: authentication_headers
 
         expect(response.parsed_body).to match(
           'errors' => [
@@ -80,7 +80,7 @@ RSpec.describe 'Create a team', type: :request do
         needed_skills: []
       }
 
-      post api_teams_path, params: params
+      post teams_path, params: params
 
       expect(response).to have_http_status(:unauthorized)
     end
@@ -93,7 +93,7 @@ RSpec.describe 'Create a team', type: :request do
         needed_skills: []
       }
 
-      post api_teams_path, params: params
+      post teams_path, params: params
 
       expect(response.parsed_body).to include(
         {

@@ -12,7 +12,7 @@ RSpec.describe 'Companies', type: :request do
             email: 'email@somecompany.com'
           }
 
-          post api_companies_path, params: params
+          post companies_path, params: params
         end
 
         it 'returns the created status' do
@@ -42,7 +42,7 @@ RSpec.describe 'Companies', type: :request do
             email: 'email@somecompany.com'
           }
 
-          post api_companies_path, params: params
+          post companies_path, params: params
         end
 
         it 'returns an unprocessable entity error' do
@@ -70,7 +70,7 @@ RSpec.describe 'Companies', type: :request do
         email: 'email@somecompany.com'
       }
 
-      post api_companies_path, params: params
+      post companies_path, params: params
     end
 
     it 'returns an unprocessable entity error' do

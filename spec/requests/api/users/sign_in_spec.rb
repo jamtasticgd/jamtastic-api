@@ -11,7 +11,7 @@ RSpec.describe 'Sign up a user', type: :request do
             email: 'confirmed@jamtastic.org',
             password: '123456'
           }
-          post(new_api_user_session_path, params: params)
+          post(new_user_session_path, params: params)
 
           response_body = response.parsed_body
 
@@ -23,7 +23,7 @@ RSpec.describe 'Sign up a user', type: :request do
             email: 'confirmed@jamtastic.org',
             password: '123456'
           }
-          post(new_api_user_session_path, params: params)
+          post(new_user_session_path, params: params)
 
           response_body = response.parsed_body
 
@@ -38,7 +38,7 @@ RSpec.describe 'Sign up a user', type: :request do
               email: 'unconfirmed@jamtastic.org',
               password: '1234567890'
             }
-            post(new_api_user_session_path, params: params)
+            post(new_user_session_path, params: params)
 
             response_body = response.parsed_body
 
@@ -50,7 +50,7 @@ RSpec.describe 'Sign up a user', type: :request do
               email: 'unconfirmed@jamtastic.org',
               password: '1234567890'
             }
-            post(new_api_user_session_path, params: params)
+            post(new_user_session_path, params: params)
 
             response_body = response.parsed_body
 
@@ -71,7 +71,7 @@ RSpec.describe 'Sign up a user', type: :request do
               email: 'unconfirmed@jamtastic.org',
               password: '123456'
             }
-            post(new_api_user_session_path, params: params)
+            post(new_user_session_path, params: params)
 
             response_body = response.parsed_body
 
@@ -83,7 +83,7 @@ RSpec.describe 'Sign up a user', type: :request do
               email: 'unconfirmed@jamtastic.org',
               password: '123456'
             }
-            post(new_api_user_session_path, params: params)
+            post(new_user_session_path, params: params)
 
             response_body = response.parsed_body
 
@@ -99,7 +99,7 @@ RSpec.describe 'Sign up a user', type: :request do
           email: 'confirmed@jamtastic.org',
           password: '1234567890'
         }
-        post(new_api_user_session_path, params: params)
+        post(new_user_session_path, params: params)
 
         response_body = response.parsed_body
 
@@ -111,7 +111,7 @@ RSpec.describe 'Sign up a user', type: :request do
           email: 'confirmed@jamtastic.org',
           password: '1234567890'
         }
-        post(new_api_user_session_path, params: params)
+        post(new_user_session_path, params: params)
 
         response_body = response.parsed_body
 
@@ -126,7 +126,7 @@ RSpec.describe 'Sign up a user', type: :request do
         email: 'unknown@jamtastic.org',
         password: '123456'
       }
-      post(new_api_user_session_path, params: params)
+      post(new_user_session_path, params: params)
 
       response_body = response.parsed_body
 
@@ -138,7 +138,7 @@ RSpec.describe 'Sign up a user', type: :request do
         email: 'unknown@jamtastic.org',
         password: '123456'
       }
-      post(new_api_user_session_path, params: params)
+      post(new_user_session_path, params: params)
 
       response_body = response.parsed_body
 
@@ -152,7 +152,7 @@ RSpec.describe 'Sign up a user', type: :request do
         email: 'confirmed@jamtastic.org',
         password: '123456'
       }
-      post(new_api_user_session_path, params: params)
+      post(new_user_session_path, params: params)
     end
 
     it 'returns a bearer token type' do
