@@ -2,7 +2,8 @@
 
 Rails.application.routes.draw do
   mount_devise_token_auth_for 'User', at: 'users', controllers: {
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    confirmations: 'users/confirmations'
   }
 
   resources :groups, only: [:update]
