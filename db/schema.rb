@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_07_135123) do
+ActiveRecord::Schema.define(version: 2021_11_08_154903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -33,6 +33,12 @@ ActiveRecord::Schema.define(version: 2021_07_07_135123) do
     t.integer "member_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "known_skills", force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "skill_id", null: false
+    t.index ["user_id", "skill_id"], name: "index_known_skills_on_user_id_and_skill_id"
   end
 
   create_table "needed_skills", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -95,6 +101,8 @@ ActiveRecord::Schema.define(version: 2021_07_07_135123) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "known_skills", "skills"
+  add_foreign_key "known_skills", "users"
   add_foreign_key "needed_skills", "skills"
   add_foreign_key "needed_skills", "teams"
   add_foreign_key "team_members", "teams"

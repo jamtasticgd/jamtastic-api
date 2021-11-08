@@ -65,6 +65,27 @@ RSpec.describe 'Sign up a user', type: :request do
 
       expect(message.subject).to eq('Instruções de confirmação')
     end
+
+    context 'and no skills are given' do
+      it 'does not create skills for the user' do
+        post(user_registration_path, params: params)
+        user = User.find_by(email: 'adam@sandler.com')
+
+        expect(user.known_skills.any?).to eq(false)
+      end
+    end
+
+    context 'and skills are given' do
+      it 'creates skills for the user' do
+        params[:known_skills] = %w[art code]
+
+        post(user_registration_path, params: params)
+        user = User.find_by(email: 'adam@sandler.com')
+        known_skills_code = user.known_skills.map(&:skill_code)
+
+        expect(known_skills_code).to match(%w[art code])
+      end
+    end
   end
 
   context 'when the user does exist' do
