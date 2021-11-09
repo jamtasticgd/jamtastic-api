@@ -32,10 +32,6 @@ module Jamtastic
     config.i18n.default_locale = 'pt-BR'
     config.i18n.locale = 'pt-BR'
 
-    Raven.configure do |config|
-      config.dsn = ENV['SENTRY_DSN']
-    end
-
     config.api_only = true
   end
 end

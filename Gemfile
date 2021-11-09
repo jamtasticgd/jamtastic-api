@@ -15,7 +15,8 @@ gem 'puma', '~> 5.5.2'
 gem 'rack-cors'
 gem 'rails', '~> 6.1.4'
 gem 'sass-rails', '~> 6.0'
-gem 'sentry-raven', '~> 3.1.2'
+gem 'sentry-rails', '~> 4.7.3'
+gem 'sentry-ruby', '~> 4.7.3'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
