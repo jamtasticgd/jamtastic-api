@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: %w[create destroy]
 
   rescue_from ActiveRecord::RecordNotFound, with: -> { head :not_found }
 
@@ -19,6 +19,13 @@ class TeamsController < ApplicationController
     else
       render(json: Contracts::ErrorsSerializer.render(contract_result), status: :unprocessable_entity)
     end
+  end
+
+  def destroy
+    team = current_user.teams.find(params[:id])
+    team.destroy!
+
+    head :no_content
   end
 
   def show
