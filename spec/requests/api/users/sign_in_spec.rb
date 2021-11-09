@@ -64,8 +64,6 @@ RSpec.describe 'Sign up a user', type: :request do
         context 'and it is within the unconfirmed access period' do
           before { travel_to Time.zone.local(2019, 1, 1) }
 
-          after { travel_back }
-
           it 'returns a success' do
             params = {
               email: 'unconfirmed@jamtastic.org',
