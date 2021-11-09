@@ -1,6 +1,22 @@
 version: '3.3'
 
 services:
+  web:
+    build:
+      context: .
+    env_file:
+      - .env
+    command: bash -c 'bundle exec rails s -b 0.0.0.0'
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
+    volumes:
+      - .:/app
+      - bundle_cache:/usr/local/bundle
+    depends_on:
+      - db
+
   db:
     image: postgres:12.3
     environment:
@@ -11,4 +27,5 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 volumes:
+  bundle_cache:
   pgdata:
