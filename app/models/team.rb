@@ -7,4 +7,8 @@ class Team < ApplicationRecord
   validates :approve_new_members, inclusion: [true, false]
 
   delegate :id, to: :user, prefix: true
+
+  def owner?(other_user)
+    user_id == other_user&.id
+  end
 end

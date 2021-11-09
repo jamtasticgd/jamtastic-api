@@ -1,14 +1,16 @@
 approved_member:
+  id: 6d061e04-65d2-5cf6-8ef6-640dfcdec045
   user: zohan_dvir
   team: team_with_moderation
   approved: true
 
 pending_member:
+  id: f3bfcf2c-5809-5be1-9203-dfd224fd8e88
   user: billy_madison
   team: team_with_moderation
   approved: false
 
-billy_madison:
+happy_gilmore:
   user: happy_gilmore
   team: team_without_moderation
   approved: true

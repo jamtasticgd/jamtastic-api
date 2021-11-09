@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:update]
   resources :companies, only: [:create]
   resources :skills, only: [:index]
-  resources :teams, only: [:create, :index] do
+  resources :teams, only: [:create, :index, :show] do
     resources :enrollments, only: [:create, :destroy], module: :teams do
       resources :approvals, only: [:create], module: :enrollments
     end

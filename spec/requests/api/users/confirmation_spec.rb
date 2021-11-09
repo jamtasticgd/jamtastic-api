@@ -16,7 +16,7 @@ RSpec.describe 'Confirm the user', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'returns a confirmation message'  do
+      it 'returns a confirmation message' do
         user = users(:unconfirmed_user)
         params = { confirmation_token: user.confirmation_token }
 
