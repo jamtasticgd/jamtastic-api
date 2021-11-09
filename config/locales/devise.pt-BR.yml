@@ -128,6 +128,7 @@ pt-BR:
       confirmed: Conta confirmada.
       missing_email: E-mail não foi informado.
       user_not_found: Se o seu email existir em nosso banco de dados, você receberá um email com instruções sobre como confirmar sua conta em alguns minutos.
+      sended_paranoid: Se o seu email existir em nosso banco de dados, você receberá um email com instruções sobre como confirmar sua conta em alguns minutos.
       sended: Se o seu email existir em nosso banco de dados, você receberá um email com instruções sobre como confirmar sua conta em alguns minutos.
   errors:
     messages:

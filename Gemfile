@@ -6,7 +6,7 @@ ruby '2.7.2'
 gem 'blueprinter', '~> 0.25.3'
 gem 'bootsnap', '~> 1.9.1', require: false
 gem 'devise', '~> 4.8.0'
-gem 'devise_token_auth', '~> 1.1.5'
+gem 'devise_token_auth', '~> 1.2.0'
 gem 'dry-validation', '~> 1.6.0'
 gem 'jbuilder', '~> 2.11.2'
 gem 'newrelic_rpm', '~> 7.2.0'
