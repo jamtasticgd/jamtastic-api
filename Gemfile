@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.2'
 
 gem 'blueprinter', '~> 0.25.3'
-gem 'bootsnap', '~> 1.7.5', require: false
+gem 'bootsnap', '~> 1.9.1', require: false
 gem 'devise', '~> 4.8.0'
 gem 'devise_token_auth', '~> 1.1.5'
 gem 'dry-validation', '~> 1.6.0'
