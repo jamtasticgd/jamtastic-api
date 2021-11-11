@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '2.7.4'
 
 gem 'blueprinter', '~> 0.25.3'
 gem 'bootsnap', '~> 1.9.1', require: false
