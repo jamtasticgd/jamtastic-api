@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'View a team', type: :request do
+RSpec.describe 'View a team' do
   context 'when the team exist' do
     it 'returns an ok status' do
       team = teams(:team_with_moderation)

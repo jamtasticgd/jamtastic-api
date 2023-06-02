@@ -6,7 +6,6 @@ class GroupsController < ApplicationController
   def update
     group = Group.find_by!(name: contract_result[:id])
 
-
     if group.update(member_count: contract_result[:member_count])
       render(json: GroupsSerializer.render(group), status: :ok)
     else

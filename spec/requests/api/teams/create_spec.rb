@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Create a team', type: :request do
+RSpec.describe 'Create a team' do
   context 'when the authorization info is informed' do
     let(:authentication_headers) do
       params = {

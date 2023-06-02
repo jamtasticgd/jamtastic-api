@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Remove a member from the team', type: :request do
+RSpec.describe 'Remove a member from the team' do
   context 'when the authorization info is informed' do
     let(:authentication_headers) do
       params = {

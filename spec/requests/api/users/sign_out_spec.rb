@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Sign out a user', type: :request do
+RSpec.describe 'Sign out a user' do
   context 'when the user is logged in' do
     it 'returns an ok status' do
       params = {
@@ -37,7 +37,7 @@ RSpec.describe 'Sign out a user', type: :request do
 
       delete(destroy_user_session_path, headers: headers)
 
-      expect(response.parsed_body['success']).to eq(true)
+      expect(response.parsed_body['success']).to be(true)
     end
   end
 
@@ -63,7 +63,7 @@ RSpec.describe 'Sign out a user', type: :request do
 
       delete(destroy_user_session_path, headers: headers)
 
-      expect(response.parsed_body['success']).to eq(false)
+      expect(response.parsed_body['success']).to be(false)
     end
   end
 end

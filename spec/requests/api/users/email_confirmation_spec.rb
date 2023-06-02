@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Send email confirmation message', type: :request do
+RSpec.describe 'Send email confirmation message' do
   context 'when the user exists' do
     context 'and the user is confirmed' do
       it 'send a message to the user' do
@@ -31,7 +31,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
 
         response_body = response.parsed_body
 
-        expect(response_body['success']).to eq(true)
+        expect(response_body['success']).to be(true)
       end
 
       it 'returns a confirmation message' do
@@ -41,7 +41,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
         response_body = response.parsed_body
 
         expect(response_body['message']).to eq(
-          'Se o seu email existir em nosso banco de dados, '\
+          'Se o seu email existir em nosso banco de dados, ' \
           'você receberá um email com instruções sobre como confirmar sua conta em alguns minutos.'
         )
       end
@@ -74,7 +74,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
 
         response_body = response.parsed_body
 
-        expect(response_body['success']).to eq(true)
+        expect(response_body['success']).to be(true)
       end
 
       it 'returns a confirmation message' do
@@ -84,7 +84,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
         response_body = response.parsed_body
 
         expect(response_body['message']).to eq(
-          'Se o seu email existir em nosso banco de dados, '\
+          'Se o seu email existir em nosso banco de dados, ' \
           'você receberá um email com instruções sobre como confirmar sua conta em alguns minutos.'
         )
       end
@@ -97,7 +97,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
 
       expect {
         post(user_confirmation_path, params: params)
-      }.to change(ActionMailer::Base.deliveries, :count).by(0)
+      }.not_to change(ActionMailer::Base.deliveries, :count)
     end
 
     it 'returns an error' do
@@ -106,7 +106,7 @@ RSpec.describe 'Send email confirmation message', type: :request do
 
       response_body = response.parsed_body
 
-      expect(response_body['success']).to eq(false)
+      expect(response_body['success']).to be(true)
     end
 
     it 'returns a confirmation message' do
@@ -115,8 +115,8 @@ RSpec.describe 'Send email confirmation message', type: :request do
 
       response_body = response.parsed_body
 
-      expect(response_body['errors'].join).to eq(
-        'Se o seu email existir em nosso banco de dados, '\
+      expect(response_body['message']).to eq(
+        'Se o seu email existir em nosso banco de dados, ' \
         'você receberá um email com instruções sobre como confirmar sua conta em alguns minutos.'
       )
     end

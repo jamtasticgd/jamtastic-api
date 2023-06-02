@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Companies', type: :request do
+RSpec.describe 'Companies' do
   describe 'create a new company' do
     context 'when the given company does not exist' do
       context 'and all correct params are given' do

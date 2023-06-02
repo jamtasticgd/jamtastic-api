@@ -7,7 +7,7 @@ module Contractable
     @@contract_classes = {}
 
     def self.contracts(options)
-      @@contract_classes[self.name] = options.with_indifferent_access
+      @@contract_classes[name] = options.with_indifferent_access
     end
 
     def contract_class

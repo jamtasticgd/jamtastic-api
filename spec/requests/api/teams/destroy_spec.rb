@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Delete a team', type: :request do
+RSpec.describe 'Delete a team' do
   context 'when the authorization info is informed' do
     let(:headers) do
       params = {

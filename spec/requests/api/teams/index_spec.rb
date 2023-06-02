@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'List teams', type: :request do
+RSpec.describe 'List teams' do
   context 'when there are teams registered' do
     before do
       create(

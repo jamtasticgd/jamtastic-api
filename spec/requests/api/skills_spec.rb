@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Skills', type: :request do
+RSpec.describe 'Skills' do
   context 'when some skills exist' do
     it 'returns an ok status' do
       get skills_path

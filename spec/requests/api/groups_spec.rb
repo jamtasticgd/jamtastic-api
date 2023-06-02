@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Groups', type: :request do
+RSpec.describe 'Groups' do
   describe 'update a group member count' do
     context 'when the given group exist' do
       context 'and all correct params are given' do

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Sign up a user', type: :request do
+RSpec.describe 'Sign up a user' do
   context 'when the user exists' do
     context 'and the password is correct' do
       context 'and it is an confirmed user' do
@@ -15,7 +15,7 @@ RSpec.describe 'Sign up a user', type: :request do
 
           response_body = response.parsed_body
 
-          expect(response_body.any?('errors')).to eq(false)
+          expect(response_body.any?('errors')).to be(false)
         end
 
         it 'returns the signed user information' do
@@ -42,7 +42,7 @@ RSpec.describe 'Sign up a user', type: :request do
 
             response_body = response.parsed_body
 
-            expect(response_body['success']).to eq(false)
+            expect(response_body['success']).to be(false)
           end
 
           it 'returns the error message' do
@@ -55,8 +55,8 @@ RSpec.describe 'Sign up a user', type: :request do
             response_body = response.parsed_body
 
             expect(response_body['errors'].join).to eq(
-              'Uma mensagem com um link de confirmação foi enviado para seu endereço de e-mail.'\
-              ' Você precisa confirmar sua conta antes de continuar.'
+              'Uma mensagem com um link de confirmação foi enviado para seu endereço de e-mail. ' \
+              'Você precisa confirmar sua conta antes de continuar.'
             )
           end
         end
@@ -73,7 +73,7 @@ RSpec.describe 'Sign up a user', type: :request do
 
             response_body = response.parsed_body
 
-            expect(response_body.any?('errors')).to eq(false)
+            expect(response_body.any?('errors')).to be(false)
           end
 
           it 'returns the signed user information' do
@@ -101,7 +101,7 @@ RSpec.describe 'Sign up a user', type: :request do
 
         response_body = response.parsed_body
 
-        expect(response_body['success']).to eq(false)
+        expect(response_body['success']).to be(false)
       end
 
       it 'returns the error message' do
@@ -128,7 +128,7 @@ RSpec.describe 'Sign up a user', type: :request do
 
       response_body = response.parsed_body
 
-      expect(response_body['success']).to eq(false)
+      expect(response_body['success']).to be(false)
     end
 
     it 'returns the error message' do

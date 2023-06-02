@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Confirm the user', type: :request do
+RSpec.describe 'Confirm the user' do
   context 'when the informed token exists' do
     context 'and the user is not confirmed' do
       it 'returns an ok status' do

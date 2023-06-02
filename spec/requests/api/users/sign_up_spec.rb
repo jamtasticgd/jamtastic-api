@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Sign up a user', type: :request do
+RSpec.describe 'Sign up a user' do
   let(:params) do
     {
       name: 'Adam Sandler',
@@ -71,7 +71,7 @@ RSpec.describe 'Sign up a user', type: :request do
         post(user_registration_path, params: params)
         user = User.find_by(email: 'adam@sandler.com')
 
-        expect(user.known_skills.any?).to eq(false)
+        expect(user.known_skills.any?).to be(false)
       end
     end
 
