@@ -1,0 +1,2 @@
+class InvalidContractError < StandardError
+end
