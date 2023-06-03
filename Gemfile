@@ -8,20 +8,16 @@ gem 'bootsnap', '~> 1.16.0', require: false
 gem 'devise', '~> 4.9.2'
 gem 'devise_token_auth', '~> 1.2.0'
 gem 'dry-validation', '~> 1.10.0'
-gem 'jbuilder', '~> 2.11.2'
 gem 'newrelic_rpm', '~> 9.2.2'
 gem 'pg', '~> 1.5.3'
 gem 'puma', '~> 6.3.0'
 gem 'rack-cors'
 gem 'rails', '~> 7.0.5'
-gem 'sass-rails', '~> 6.0'
 gem 'sentry-rails', '~> 5.9.0'
-gem 'sentry-ruby', '~> 5.9.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
   gem 'dotenv-rails', '~> 2.8.1'
-  gem 'pry-byebug', '~> 3.10.1'
   gem 'pry-rails', '~> 0.3.9'
   gem 'rspec-rails', '~> 6.0.3'
 end

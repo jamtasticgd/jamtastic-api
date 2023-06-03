@@ -1,9 +1,0 @@
-pt-BR:
-  home:
-    info:
-      name: "Jamtastic"
-      description: "Uma comunidade de desenvolvimento de jogos brasileira."
-    dashboard:
-      members_count: "Membros"
-      jams_count: "Game Jams"
-      games_count: "Jogos produzidos"
