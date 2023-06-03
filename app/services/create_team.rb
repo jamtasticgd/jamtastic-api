@@ -1,6 +1,4 @@
 class CreateTeam
-  delegate :errors, to: :team
-
   def initialize(user:, params:)
     @user = user
     @params = params
