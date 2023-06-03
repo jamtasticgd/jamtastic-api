@@ -37,8 +37,14 @@ jobs:
       - run: cp .env.example .env
       - run: bundle exec rake db:create
 
-      # run tests!
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+      - run: ./cc-test-reporter before-build
       - run:
           name: run tests
           command: |
             bundle exec rspec
+      - run: ./cc-test-reporter after-build --coverage-input-type simplecov
