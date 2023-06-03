@@ -6,3 +6,5 @@ pt-BR:
   enrollments:
     errors:
       already_a_member: Já faz parte desse time.
+      cant_remove_admin: Não é possível remover adminstradores do time.
+      cant_remove_others: Não é possível remover outros do time.

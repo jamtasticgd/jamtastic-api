@@ -13,4 +13,12 @@ class TeamMember < ApplicationRecord
 
   scope :members, -> { where(kind: MEMBER) }
   scope :admin, -> { where(kind: ADMIN) }
+
+  def admin?
+    kind == ADMIN
+  end
+
+  def member?
+    kind == member
+  end
 end

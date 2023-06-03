@@ -18,56 +18,76 @@ RSpec.describe 'Remove a member from the team' do
       }
     end
 
-    context 'and the team exists' do
-      context 'and the user is the owner' do
-        context 'and the enrollment exist' do
-          it 'deletes the enrollment' do
-            team = teams(:team_with_moderation)
-            team_member = team.team_members.first
+    context 'when the enrollment is deleted' do
+      it 'returns a no content status' do
+        team = teams(:team_with_moderation)
+        team_member = team.team_members.first
 
-            expect {
-              delete team_enrollment_path(team, team_member), headers: authentication_headers
-            }.to change(TeamMember, :count).by(-1)
-          end
+        delete team_enrollment_path(team, team_member), headers: authentication_headers
 
-          it 'returns a no content status' do
-            team = teams(:team_with_moderation)
-            team_member = team.team_members.first
-
-            delete team_enrollment_path(team, team_member), headers: authentication_headers
-
-            expect(response).to have_http_status(:no_content)
-          end
-        end
-
-        context 'and the enrollment does not exist' do
-          it 'returns a not found error' do
-            team = teams(:team_with_moderation)
-
-            delete team_enrollment_path(team, 'team_member_id'), headers: authentication_headers
-
-            expect(response).to have_http_status(:not_found)
-          end
-        end
-      end
-
-      context 'and the user is not the owner' do
-        it 'returns a not found error' do
-          team = teams(:team_without_moderation)
-          team_member = team.team_members.first
-
-          delete team_enrollment_path(team, team_member), headers: authentication_headers
-
-          expect(response).to have_http_status(:not_found)
-        end
+        expect(response).to have_http_status(:no_content)
       end
     end
 
-    context 'and the team does not exists' do
-      it 'returns a not found error' do
-        delete team_enrollment_path('team_id', 'team_member_id'), headers: authentication_headers
+    context 'when a record not found error is raised' do
+      it 'returns a not found status' do
+        remove_enrollment_service = instance_double(RemoveEnrollment)
+        allow(remove_enrollment_service).to receive(:call).and_raise(ActiveRecord::RecordNotFound)
+        allow(RemoveEnrollment).to receive(:new).and_return(remove_enrollment_service)
+        team = teams(:team_with_moderation)
+        team_member = team.team_members.first
+
+        delete team_enrollment_path(team, team_member), headers: authentication_headers
 
         expect(response).to have_http_status(:not_found)
+      end
+    end
+
+    context 'when a can not remove admin error is raised' do
+      before do
+        remove_enrollment_service = instance_double(RemoveEnrollment)
+        allow(remove_enrollment_service).to receive(:call).and_raise(RemoveEnrollment::CantRemoveAdminError)
+        allow(RemoveEnrollment).to receive(:new).and_return(remove_enrollment_service)
+        team = teams(:team_with_moderation)
+        team_member = team.team_members.first
+
+        delete team_enrollment_path(team, team_member), headers: authentication_headers
+      end
+
+      it 'returns a unprocessable entity status' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'returns the error message' do
+        expect(response.parsed_body).to match(
+          {
+            'errors' => ['Não é possível remover adminstradores do time.']
+          }
+        )
+      end
+    end
+
+    context 'when a can not remove others error is raised' do
+      before do
+        remove_enrollment_service = instance_double(RemoveEnrollment)
+        allow(remove_enrollment_service).to receive(:call).and_raise(RemoveEnrollment::CantRemoveOthersError)
+        allow(RemoveEnrollment).to receive(:new).and_return(remove_enrollment_service)
+        team = teams(:team_with_moderation)
+        team_member = team.team_members.first
+
+        delete team_enrollment_path(team, team_member), headers: authentication_headers
+      end
+
+      it 'returns a unprocessable entity status' do
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+
+      it 'returns the error message' do
+        expect(response.parsed_body).to match(
+          {
+            'errors' => ['Não é possível remover outros do time.']
+          }
+        )
       end
     end
   end
