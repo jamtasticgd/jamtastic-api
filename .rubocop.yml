@@ -1,4 +1,5 @@
 require:
+  - rubocop-factory_bot
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
@@ -49,6 +50,9 @@ Style/AsciiComments:
 
 Style/BlockDelimiters:
   EnforcedStyle: braces_for_chaining
+
+Style/ClassVars:
+  Enabled: false
 
 Style/ClassAndModuleChildren:
   Enabled: false

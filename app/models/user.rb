@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
-  has_many :team_members
+  has_many :team_members, dependent: :destroy
   has_many :teams, through: :team_members
   has_many :known_skills, dependent: :destroy
 
