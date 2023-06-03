@@ -1,24 +1,33 @@
-# README
+[![JamtasticGD](https://circleci.com/gh/jamtasticgd/jamtastic-api/tree/main.svg?style=svg)](https://app.circleci.com/pipelines/github/jamtasticgd/jamtastic-api?branch=main)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Jamtastic API
+This project contains all API related code for jamtastic.org tools and website.
 
-Things you may want to cover:
+The complete endpoint documentation can be found [here](https://documenter.getpostman.com/view/2140691/2s93sW8vcf).
 
-* Ruby version
+## Setup
+This project is currently using
+- Ruby 3.2
+- Rails 7.0
+- Postgres 12
 
-* System dependencies
+To make the project setup, first clone the project
 
-* Configuration
+```zsh
+git clone https://github.com/jamtasticgd/jamtastic-api.git
+```
 
-* Database creation
+And then use run the application `setup`
 
-* Database initialization
+```zsh
+bin/setup
+```
 
-* How to run the test suite
+**Important** If the setup fails make sure to properly configure the `.env` file.
 
-* Services (job queues, cache servers, search engines, etc.)
+## Running the tests
+To run the test suite, run the command
 
-* Deployment instructions
-
-* ...
+```zsh
+bundle exec rspec
+```
