@@ -11,19 +11,19 @@ class TeamsSerializer < Blueprinter::Base
     team.needed_skills.map(&:skill_code)
   end
 
-  association :user, name: :owner, blueprint: UsersSerializer
+  association :owner, blueprint: UsersSerializer
 
   association :members, blueprint: EnrollmentsSerializer, view: :summary_member do |team|
-    team.team_members.approved
+    team.team_members.members.approved
   end
 
   view :owner do
     association :members, blueprint: EnrollmentsSerializer, view: :summary_owner do |team|
-      team.team_members.approved
+      team.team_members.members.approved
     end
 
     association :pending_members, blueprint: EnrollmentsSerializer, view: :summary_owner do |team|
-      team.team_members.pending
+      team.team_members.members.pending
     end
   end
 end

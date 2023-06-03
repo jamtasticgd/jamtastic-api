@@ -13,7 +13,7 @@ class JoinTeam
 
     approved = !team.approve_new_members
 
-    TeamMember.create(approved: approved, team: team, user: user)
+    TeamMember.create(approved: approved, team: team, user: user, kind: TeamMember::MEMBER)
   end
 
   private
@@ -22,7 +22,6 @@ class JoinTeam
 
   def already_a_member?
     team_members = team.team_members.map(&:user_id)
-    team_members << team.user.id
 
     team_members.find { |member_user_id| member_user_id == user.id }
   end

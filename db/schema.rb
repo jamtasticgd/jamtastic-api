@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2021_11_08_154903) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_181406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -59,6 +59,7 @@ ActiveRecord::Schema[7.0].define(version: 2021_11_08_154903) do
     t.boolean "approved", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "kind", null: false
     t.index ["team_id", "user_id"], name: "index_team_members_on_team_id_and_user_id", unique: true
   end
 
@@ -66,7 +67,6 @@ ActiveRecord::Schema[7.0].define(version: 2021_11_08_154903) do
     t.string "name", null: false
     t.text "description", null: false
     t.boolean "approve_new_members", null: false
-    t.uuid "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["created_at"], name: "index_teams_on_created_at"
@@ -106,5 +106,4 @@ ActiveRecord::Schema[7.0].define(version: 2021_11_08_154903) do
   add_foreign_key "needed_skills", "teams"
   add_foreign_key "team_members", "teams"
   add_foreign_key "team_members", "users"
-  add_foreign_key "teams", "users"
 end

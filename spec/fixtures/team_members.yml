@@ -1,16 +1,33 @@
+team_with_moderation_admin:
+  id: bf6b2a31-2c97-4f77-8314-55d96ca988b5
+  user: confirmed_user
+  team: team_with_moderation
+  kind: admin
+  approved: true
+
+team_without_moderation_admin:
+  id: 1b3d34d6-ce07-48e9-bc69-0fbdecca1adc
+  user: unconfirmed_user
+  team: team_without_moderation
+  kind: admin
+  approved: true
+
 approved_member:
   id: 6d061e04-65d2-5cf6-8ef6-640dfcdec045
   user: zohan_dvir
   team: team_with_moderation
+  kind: member
   approved: true
 
 pending_member:
   id: f3bfcf2c-5809-5be1-9203-dfd224fd8e88
   user: billy_madison
   team: team_with_moderation
+  kind: member
   approved: false
 
 happy_gilmore:
   user: happy_gilmore
   team: team_without_moderation
+  kind: member
   approved: true

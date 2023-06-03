@@ -7,6 +7,7 @@ RSpec.describe 'List teams' do
     before do
       create(
         :team,
+        :with_admin,
         name: 'Happy Madison Productions',
         description: 'We are a team making great games and movies.'
       )

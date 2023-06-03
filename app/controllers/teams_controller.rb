@@ -32,7 +32,7 @@ class TeamsController < ApplicationController
   end
 
   def destroy
-    team = current_user.teams.find(params[:id])
+    team = Team.owned(current_user).find(params[:id])
     team.destroy!
 
     head :no_content

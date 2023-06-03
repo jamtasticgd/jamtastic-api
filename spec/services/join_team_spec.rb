@@ -41,7 +41,8 @@ RSpec.describe JoinTeam, type: :service do
       context 'but the user the team owner' do
         it 'raises an already a member error' do
           user = create(:user)
-          team = create(:team, user: user)
+          team = create(:team)
+          create(:team_member, :admin, team: team, user: user)
 
           expect {
             described_class.new(team: team, user: user).call

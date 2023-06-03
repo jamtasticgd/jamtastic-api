@@ -7,8 +7,9 @@ class CreateTeam
   end
 
   def call
-    team = Team.new(user: user, **params.except(:needed_skills))
+    team = Team.new(**params.except(:needed_skills))
     build_needed_skills(team)
+    team.team_members.build(approved: true, user: user, kind: TeamMember::ADMIN)
     team.save
 
     team

@@ -21,7 +21,7 @@ RSpec.describe 'Join a team' do
     context 'and the team exists' do
       context 'and the user is not part of the team' do
         it 'returns a success' do
-          team = create(:team)
+          team = create(:team, :with_admin)
 
           post team_enrollments_path(team), headers: authentication_headers
 
@@ -29,7 +29,7 @@ RSpec.describe 'Join a team' do
         end
 
         it 'returns the team member data' do
-          team = create(:team)
+          team = create(:team, :with_admin)
 
           post team_enrollments_path(team), headers: authentication_headers
 
@@ -46,7 +46,7 @@ RSpec.describe 'Join a team' do
 
       context 'and the user is already part of the team' do
         it 'returns an unprocessable entity error' do
-          team = create(:team)
+          team = create(:team, :with_admin)
           post team_enrollments_path(team), headers: authentication_headers
 
           post team_enrollments_path(team), headers: authentication_headers
@@ -55,7 +55,7 @@ RSpec.describe 'Join a team' do
         end
 
         it 'returns the error message' do
-          team = create(:team)
+          team = create(:team, :with_admin)
           post team_enrollments_path(team), headers: authentication_headers
 
           post team_enrollments_path(team), headers: authentication_headers
@@ -80,7 +80,7 @@ RSpec.describe 'Join a team' do
 
   context 'when the authorization info is not informed' do
     it 'returns an unauthorized error' do
-      team = create(:team)
+      team = create(:team, :with_admin)
 
       post team_enrollments_path(team)
 
@@ -88,7 +88,7 @@ RSpec.describe 'Join a team' do
     end
 
     it 'returns the error message' do
-      team = create(:team)
+      team = create(:team, :with_admin)
 
       post team_enrollments_path(team)
 
