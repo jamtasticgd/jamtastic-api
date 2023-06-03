@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   resources :groups, only: [:update]
   resources :companies, only: [:create]
   resources :skills, only: [:index]
-  resources :teams, only: [:create, :index, :show, :destroy] do
-    resources :enrollments, only: [:create, :destroy], module: :teams do
+  resources :teams, only: %i[create index show destroy update] do
+    resources :enrollments, only: %i[create destroy], module: :teams do
       resources :approvals, only: [:create], module: :enrollments
     end
   end

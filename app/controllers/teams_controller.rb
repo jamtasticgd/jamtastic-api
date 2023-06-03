@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class TeamsController < ApplicationController
-  before_action :authenticate_user!, only: %w[create destroy]
-  contracts create: ::Teams::CreateContract
+  before_action :authenticate_user!, only: %w[create update destroy]
+  contracts create: ::Teams::CreateContract, update: ::Teams::UpdateContract
 
   def index
     teams = Team.order(:created_at)
@@ -26,6 +26,16 @@ class TeamsController < ApplicationController
 
     if team.persisted?
       render(json: TeamsSerializer.render(team), status: :created)
+    else
+      render(json: Models::ErrorsSerializer.render(team), status: :unprocessable_entity)
+    end
+  end
+
+  def update
+    team = UpdateTeam.new(user: current_user, params: contract_result.to_h).call
+
+    if team.valid?
+      render(json: TeamsSerializer.render(team), status: :ok)
     else
       render(json: Models::ErrorsSerializer.render(team), status: :unprocessable_entity)
     end
