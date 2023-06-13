@@ -89,6 +89,8 @@ GEM
       rails (>= 4.2.0, < 7.1)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    dockerfile-rails (1.4.2)
+      rails
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -306,6 +308,7 @@ DEPENDENCIES
   bootsnap (~> 1.16.0)
   devise (~> 4.9.2)
   devise_token_auth (~> 1.2.0)
+  dockerfile-rails (>= 1.4)
   dotenv-rails (~> 2.8.1)
   dry-validation (~> 1.10.0)
   factory_bot_rails (~> 6.2.0)

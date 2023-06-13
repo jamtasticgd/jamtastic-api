@@ -23,6 +23,7 @@ group :development, :test do
 end
 
 group :development do
+	gem 'dockerfile-rails', '>= 1.4'
   gem 'listen', '~> 3.8.0'
   gem 'rubocop', '~> 1.51.0', require: false
   gem 'rubocop-performance', '~> 1.18.0', require: false
