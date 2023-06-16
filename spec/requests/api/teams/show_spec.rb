@@ -63,8 +63,9 @@ RSpec.describe 'View a team' do
 
       get team_path(team)
 
-      expect(response.parsed_body).to include(
-        'owner' => {
+      expect(response.parsed_body['members']).to include(
+        'kind' => 'admin',
+        'user' => {
           'name' => 'Confirmed user'
         }
       )
