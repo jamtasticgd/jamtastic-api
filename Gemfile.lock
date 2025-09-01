@@ -396,6 +396,7 @@ DEPENDENCIES
   rubocop-rspec_rails (~> 2.31)
   sentry-rails (~> 5.9)
   simplecov (~> 0.22)
+  sqlite3 (~> 1.4)
   tzinfo-data
   web-console (~> 4.2)
 
