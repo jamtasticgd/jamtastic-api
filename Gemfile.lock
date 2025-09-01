@@ -127,6 +127,7 @@ GEM
       dry-initializer (~> 3.0)
       dry-schema (>= 1.12, < 2)
       zeitwerk (~> 2.6)
+    erb (5.0.2)
     erubi (1.12.0)
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
@@ -283,6 +284,8 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
+    sqlite3 (1.7.3)
+      mini_portile2 (~> 2.8.0)
     thor (1.2.2)
     timeout (0.3.2)
     tzinfo (2.0.6)
@@ -311,6 +314,7 @@ DEPENDENCIES
   dockerfile-rails (>= 1.4)
   dotenv-rails (~> 2.8.1)
   dry-validation (~> 1.10.0)
+  erb
   factory_bot_rails (~> 6.2.0)
   faker (~> 3.2.0)
   listen (~> 3.8.0)
@@ -327,6 +331,7 @@ DEPENDENCIES
   rubocop-rspec (~> 2.22.0)
   sentry-rails (~> 5.9.0)
   simplecov (~> 0.22)
+  sqlite3 (~> 1.4)
   tzinfo-data
   web-console (~> 4.2.0)
 

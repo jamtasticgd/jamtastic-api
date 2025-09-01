@@ -1,5 +1,6 @@
 # Ignore bundler config.
 /.bundle
+/vendor
 
 # Ignore all logfiles and tempfiles.
 /coverage/*
@@ -18,7 +19,12 @@
 /yarn-error.log
 
 /public/assets
+/public/packs
+/public/packs-test
 .byebug_history
+
+# Development scripts (moved to scripts/ directory)
+# dev
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '>= 3.2.2'
 
 gem 'blueprinter', '~> 0.25.3'
 gem 'bootsnap', '~> 1.16.0', require: false
@@ -15,11 +15,13 @@ gem 'rack-cors'
 gem 'rails', '~> 7.0.5'
 gem 'sentry-rails', '~> 5.9.0'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'erb'
 
 group :development, :test do
   gem 'dotenv-rails', '~> 2.8.1'
   gem 'pry-rails', '~> 0.3.9'
   gem 'rspec-rails', '~> 6.0.3'
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :development do

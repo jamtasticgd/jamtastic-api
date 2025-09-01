@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root 'welcome#index'
+  get 'welcome/index'
   mount_devise_token_auth_for 'User', at: 'users', controllers: {
     registrations: 'users/registrations',
     confirmations: 'users/confirmations'
