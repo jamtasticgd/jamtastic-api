@@ -1,0 +1,557 @@
+openapi: 3.0.1
+info:
+  title: Jamtastic API V1
+  version: v1
+  description: API documentation for Jamtastic - Team collaboration platform
+servers:
+  - url: http://localhost:3000
+    description: Development server
+paths:
+  /skills:
+    get:
+      tags:
+        - Skills
+      summary: List all skills
+      description: Retrieve a list of all available skills
+      responses:
+        '200':
+          description: Skills retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: string
+                      description: Skill code identifier
+  /teams:
+    get:
+      tags:
+        - Teams
+      summary: List all teams
+      description: Retrieve a list of all teams
+      responses:
+        '200':
+          description: Teams retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    approve_new_members:
+                      type: boolean
+                    created_at:
+                      type: string
+                      format: date-time
+                    updated_at:
+                      type: string
+                      format: date-time
+                    needed_skills:
+                      type: array
+                      items:
+                        type: string
+                    members:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          user_id:
+                            type: integer
+                          status:
+                            type: string
+    post:
+      tags:
+        - Teams
+      summary: Create a new team
+      description: Create a new team
+      security:
+        - bearer_auth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Team name
+                description:
+                  type: string
+                  description: Team description
+                approve_new_members:
+                  type: boolean
+                  description: Whether new members need approval
+                needed_skills:
+                  type: array
+                  items:
+                    type: string
+                  description: List of required skill codes
+              required:
+                - name
+      responses:
+        '201':
+          description: Team created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  approve_new_members:
+                    type: boolean
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  needed_skills:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /teams/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Team ID
+    get:
+      tags:
+        - Teams
+      summary: Get team details
+      description: Retrieve details of a specific team
+      responses:
+        '200':
+          description: Team details retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  approve_new_members:
+                    type: boolean
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  needed_skills:
+                    type: array
+                    items:
+                      type: string
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        user_id:
+                          type: integer
+                        status:
+                          type: string
+        '404':
+          description: Team not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - Teams
+      summary: Update team
+      description: Update an existing team
+      security:
+        - bearer_auth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Team name
+                description:
+                  type: string
+                  description: Team description
+                approve_new_members:
+                  type: boolean
+                  description: Whether new members need approval
+                needed_skills:
+                  type: array
+                  items:
+                    type: string
+                  description: List of required skill codes
+      responses:
+        '200':
+          description: Team updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  approve_new_members:
+                    type: boolean
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+                  needed_skills:
+                    type: array
+                    items:
+                      type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Team not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - Teams
+      summary: Delete team
+      description: Delete a team
+      security:
+        - bearer_auth: []
+      responses:
+        '204':
+          description: Team deleted successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Team not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /companies:
+    post:
+      tags:
+        - Companies
+      summary: Create a new company
+      description: Create a new company
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: Company name
+                description:
+                  type: string
+                  description: Company description
+                website:
+                  type: string
+                  description: Company website URL
+                industry:
+                  type: string
+                  description: Company industry
+              required:
+                - name
+      responses:
+        '201':
+          description: Company created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  website:
+                    type: string
+                  industry:
+                    type: string
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /groups/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        description: Group name
+    put:
+      tags:
+        - Groups
+      summary: Update group
+      description: Update an existing group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                member_count:
+                  type: integer
+                  description: Number of members in the group
+              required:
+                - member_count
+      responses:
+        '200':
+          description: Group updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  name:
+                    type: string
+                  member_count:
+                    type: integer
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+        '404':
+          description: Group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users:
+    post:
+      tags:
+        - Users
+      summary: Register a new user
+      description: Register a new user account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: User email address
+                password:
+                  type: string
+                  description: User password
+                password_confirmation:
+                  type: string
+                  description: Password confirmation
+                name:
+                  type: string
+                  description: User full name
+                telegram:
+                  type: string
+                  description: Telegram username
+                known_skills:
+                  type: array
+                  items:
+                    type: string
+                  description: List of skill codes the user knows
+              required:
+                - email
+                - password
+                - password_confirmation
+      responses:
+        '200':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      telegram:
+                        type: string
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/sign_in:
+    post:
+      tags:
+        - Users
+      summary: Sign in user
+      description: Authenticate user and return access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  description: User email address
+                password:
+                  type: string
+                  description: User password
+              required:
+                - email
+                - password
+      responses:
+        '200':
+          description: User signed in successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      telegram:
+                        type: string
+                  access_token:
+                    type: string
+                  client:
+                    type: string
+                  uid:
+                    type: string
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/sign_out:
+    delete:
+      tags:
+        - Users
+      summary: Sign out user
+      description: Sign out user and invalidate access token
+      security:
+        - bearer_auth: []
+      responses:
+        '200':
+          description: User signed out successfully
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        details:
+          type: object
+          description: Additional error details
+security:
+  - bearer_auth: []

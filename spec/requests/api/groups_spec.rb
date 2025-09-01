@@ -1,64 +1,62 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require 'swagger_helper'
 
-RSpec.describe 'Groups' do
-  describe 'update a group member count' do
-    context 'when the given group exist' do
-      context 'and all correct params are given' do
-        it 'returns the updated group' do
-          params = { member_count: 330 }
+RSpec.describe 'Groups API', type: :request do
+  path '/groups/{id}' do
+    parameter name: :id, in: :path, type: :string, description: 'Group name'
 
-          put group_path('telegram'), params: params
+    put 'Update group' do
+      tags 'Groups'
+      description 'Update an existing group'
+      consumes 'application/json'
+      produces 'application/json'
 
-          expect(response.parsed_body).to include(
-            'name' => 'telegram',
-            'member_count' => 330
-          )
-        end
+      parameter name: :group, in: :body, schema: {
+        type: :object,
+        properties: {
+          member_count: { type: :integer, description: 'Number of members in the group' }
+        },
+        required: ['member_count']
+      }
 
-        it 'returns a success' do
-          params = { member_count: 330 }
+      response '200', 'Group updated successfully' do
+        schema type: :object,
+               properties: {
+                 id: { type: :string },
+                 name: { type: :string },
+                 member_count: { type: :integer },
+                 created_at: { type: :string, format: :date_time },
+                 updated_at: { type: :string, format: :date_time }
+               }
 
-          put group_path('telegram'), params: params
+        let(:existing_group) { create(:group, name: 'test-group') }
+        let(:id) { existing_group.name }
+        let(:group) { { member_count: 10 } }
 
-          expect(response).to have_http_status(:ok)
-        end
-      end
-
-      context 'and the member count is not informed' do
-        it 'returns the error description' do
-          params = { member_count: nil }
-
-          put group_path('telegram'), params: params
-
-          expect(response.parsed_body).to match(
-            {
-              'errors' => [{
-                'detail' => 'não foi informado(a)',
-                'field' => 'member_count'
-              }]
-            }
-          )
-        end
-
-        it 'returns an unprocessable entity error' do
-          params = { member_count: nil }
-
-          put group_path('telegram'), params: params
-
-          expect(response).to have_http_status(:unprocessable_entity)
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['member_count']).to eq(10)
         end
       end
-    end
 
-    context 'when the given group does not exist' do
-      it 'returns a not found error' do
-        params = { member_count: 330 }
+      response '404', 'Group not found' do
+        schema '$ref' => '#/components/schemas/error'
 
-        put group_path('inexistent_group'), params: params
+        let(:id) { 'non-existent-group' }
+        let(:group) { { member_count: 10 } }
 
-        expect(response).to have_http_status(:not_found)
+        run_test!
+      end
+
+      response '422', 'Validation error' do
+        schema '$ref' => '#/components/schemas/error'
+
+        let(:existing_group) { create(:group, name: 'test-group') }
+        let(:id) { existing_group.name }
+        let(:group) { { member_count: -1 } }
+
+        run_test!
       end
     end
   end

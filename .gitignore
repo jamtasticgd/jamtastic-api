@@ -11,6 +11,12 @@
 .env*
 !.env.example
 
+# Ignore database files
+*.sqlite3
+*.sqlite3-journal
+db/*.sqlite3
+db/*.sqlite3-journal
+
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep

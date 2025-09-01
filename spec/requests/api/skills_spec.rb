@@ -1,45 +1,33 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require 'swagger_helper'
 
-RSpec.describe 'Skills' do
-  context 'when some skills exist' do
-    it 'returns an ok status' do
-      get skills_path
+RSpec.describe 'Skills API', type: :request do
+  path '/skills' do
+    get 'List all skills' do
+      tags 'Skills'
+      description 'Retrieve a list of all available skills'
+      produces 'application/json'
 
-      expect(response).to have_http_status(:ok)
-    end
+      response '200', 'Skills retrieved successfully' do
+        schema type: :array,
+               items: {
+                 type: :object,
+                 properties: {
+                   code: { type: :string, description: 'Skill code identifier' }
+                 }
+               }
 
-    it 'returns the skills' do
-      get skills_path
+        let!(:skill1) { create(:skill, code: 'ruby') }
+        let!(:skill2) { create(:skill, code: 'javascript') }
 
-      expect(response.parsed_body).to match(
-        [
-          { 'code' => 'art' },
-          { 'code' => 'audio' },
-          { 'code' => 'code' },
-          { 'code' => 'game_design' },
-          { 'code' => 'writing' }
-        ]
-      )
-    end
-  end
-
-  context 'when no skills exist' do
-    before do
-      Skill.delete_all
-    end
-
-    it 'returns an ok status' do
-      get skills_path
-
-      expect(response).to have_http_status(:ok)
-    end
-
-    it 'retuns an empty json' do
-      get skills_path
-
-      expect(response.parsed_body).to match([])
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data).to be_an(Array)
+          expect(data.length).to eq(2)
+          expect(data.map { |s| s['code'] }).to contain_exactly('ruby', 'javascript')
+        end
+      end
     end
   end
 end

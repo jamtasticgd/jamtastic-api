@@ -3,6 +3,7 @@ FactoryBot.define do
     name { Faker::Lorem.sentence }
     description { Faker::Lorem.sentence }
     approve_new_members { false }
+    association :user, factory: :user
 
     trait :with_admin do
       after(:create) do |team|

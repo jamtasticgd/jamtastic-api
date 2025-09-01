@@ -21,6 +21,10 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.8.1'
   gem 'pry-rails', '~> 0.3.9'
   gem 'rspec-rails', '~> 6.0.3'
+  gem 'rswag', '~> 2.8.0'
+  gem 'rswag-api', '~> 2.8.0'
+  gem 'rswag-specs', '~> 2.8.0'
+  gem 'rswag-ui', '~> 2.8.0'
   gem 'sqlite3', '~> 1.4'
 end
 

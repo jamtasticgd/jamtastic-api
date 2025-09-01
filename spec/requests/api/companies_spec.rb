@@ -1,89 +1,63 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require 'swagger_helper'
 
-RSpec.describe 'Companies' do
-  describe 'create a new company' do
-    context 'when the given company does not exist' do
-      context 'and all correct params are given' do
-        before do
-          params = {
-            name: 'Some company',
-            email: 'email@somecompany.com'
-          }
+RSpec.describe 'Companies API', type: :request do
+  path '/companies' do
+    post 'Create a new company' do
+      tags 'Companies'
+      description 'Create a new company'
+      consumes 'application/json'
+      produces 'application/json'
 
-          post companies_path, params: params
-        end
-
-        it 'returns the created status' do
-          expect(response).to have_http_status(:created)
-        end
-
-        it 'returns the created company' do
-          expect(response.parsed_body).to include(
-            'name' => 'Some company',
-            'email' => 'email@somecompany.com'
-          )
-        end
-
-        it 'creates a company' do
-          company = Company.find_by(
-            name: 'Some company'
-          )
-
-          expect(company).to be_present
-        end
-      end
-
-      context 'and the name is not informed' do
-        before do
-          params = {
-            name: nil,
-            email: 'email@somecompany.com'
-          }
-
-          post companies_path, params: params
-        end
-
-        it 'returns an unprocessable entity error' do
-          expect(response).to have_http_status(:unprocessable_entity)
-        end
-
-        it 'returns the error message' do
-          expect(response.parsed_body).to include(
-            'errors' => [{
-              'detail' => 'não foi informado(a)',
-              'field' => 'name'
-            }]
-          )
-        end
-      end
-    end
-  end
-
-  context 'when the given company does exist' do
-    before do
-      Company.create!(name: 'Some company')
-
-      params = {
-        name: 'Some company',
-        email: 'email@somecompany.com'
+      parameter name: :company, in: :body, schema: {
+        type: :object,
+        properties: {
+          name: { type: :string, description: 'Company name' },
+          description: { type: :string, description: 'Company description' },
+          website: { type: :string, description: 'Company website URL' },
+          industry: { type: :string, description: 'Company industry' }
+        },
+        required: ['name']
       }
 
-      post companies_path, params: params
-    end
+      response '201', 'Company created successfully' do
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 name: { type: :string },
+                 description: { type: :string },
+                 website: { type: :string },
+                 industry: { type: :string },
+                 created_at: { type: :string, format: :date_time },
+                 updated_at: { type: :string, format: :date_time }
+               }
 
-    it 'returns an unprocessable entity error' do
-      expect(response).to have_http_status(:unprocessable_entity)
-    end
+        let(:company) do
+          {
+            name: 'New Company',
+            description: 'A new company for testing',
+            website: 'https://example.com',
+            industry: 'Technology'
+          }
+        end
 
-    it 'returns the error message' do
-      expect(response.parsed_body).to include(
-        'errors' => [{
-          'detail' => 'já está em uso',
-          'field' => 'name'
-        }]
-      )
+        run_test! do |response|
+          data = JSON.parse(response.body)
+          expect(data['name']).to eq('New Company')
+          expect(data['description']).to eq('A new company for testing')
+          expect(data['website']).to eq('https://example.com')
+          expect(data['industry']).to eq('Technology')
+        end
+      end
+
+      response '422', 'Validation error' do
+        schema '$ref' => '#/components/schemas/error'
+
+        let(:company) { { name: '' } }
+
+        run_test!
+      end
     end
   end
 end
