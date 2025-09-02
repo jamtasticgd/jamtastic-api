@@ -15,19 +15,19 @@ RSpec.describe 'Sign up a user' do
 
   context 'when the user does not exist' do
     it 'returns a success' do
-      post(user_registration_path, params: params)
+      post(user_registration_path, params:)
 
       expect(response).to have_http_status(:ok)
     end
 
     it 'creates a new user' do
       expect {
-        post(user_registration_path, params: params)
+        post(user_registration_path, params:)
       }.to change(User, :count).by(1)
     end
 
     it 'creates a new user with the given email' do
-      post(user_registration_path, params: params)
+      post(user_registration_path, params:)
 
       user = User.find_by(email: 'adam@sandler.com')
 
@@ -35,7 +35,7 @@ RSpec.describe 'Sign up a user' do
     end
 
     it 'creates a new user with the given name' do
-      post(user_registration_path, params: params)
+      post(user_registration_path, params:)
 
       user = User.find_by(email: 'adam@sandler.com')
 
@@ -43,7 +43,7 @@ RSpec.describe 'Sign up a user' do
     end
 
     it 'creates a new user with the given telegram user name' do
-      post(user_registration_path, params: params)
+      post(user_registration_path, params:)
 
       user = User.find_by(email: 'adam@sandler.com')
 
@@ -51,7 +51,7 @@ RSpec.describe 'Sign up a user' do
     end
 
     it 'sends an e-mail to the user' do
-      post(user_registration_path, params: params)
+      post(user_registration_path, params:)
 
       message = ActionMailer::Base.deliveries.last
 
@@ -59,7 +59,7 @@ RSpec.describe 'Sign up a user' do
     end
 
     it 'sends the confirmation instructions to the user' do
-      post(user_registration_path, params: params)
+      post(user_registration_path, params:)
 
       message = ActionMailer::Base.deliveries.last
 
@@ -68,7 +68,7 @@ RSpec.describe 'Sign up a user' do
 
     context 'and no skills are given' do
       it 'does not create skills for the user' do
-        post(user_registration_path, params: params)
+        post(user_registration_path, params:)
         user = User.find_by(email: 'adam@sandler.com')
 
         expect(user.known_skills.any?).to be(false)
@@ -79,7 +79,7 @@ RSpec.describe 'Sign up a user' do
       it 'creates skills for the user' do
         params[:known_skills] = %w[art code]
 
-        post(user_registration_path, params: params)
+        post(user_registration_path, params:)
         user = User.find_by(email: 'adam@sandler.com')
         known_skills_code = user.known_skills.map(&:skill_code)
 
@@ -90,9 +90,9 @@ RSpec.describe 'Sign up a user' do
 
   context 'when the user does exist' do
     it 'returns an unprocessable entity error' do
-      post(user_registration_path, params: params)
+      post(user_registration_path, params:)
 
-      post(user_registration_path, params: params)
+      post(user_registration_path, params:)
 
       expect(response).to have_http_status(:unprocessable_entity)
     end

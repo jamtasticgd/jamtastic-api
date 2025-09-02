@@ -9,7 +9,7 @@ RSpec.describe 'Join a team' do
         email: 'confirmed@jamtastic.org',
         password: '123456'
       }
-      post(user_session_path, params: params)
+      post(user_session_path, params:)
 
       {
         uid: response.headers['uid'],

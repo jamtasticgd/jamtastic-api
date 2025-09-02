@@ -11,7 +11,7 @@ RSpec.describe 'Update a team' do
         email: user.email,
         password: '123456'
       }
-      post(user_session_path, params: params)
+      post(user_session_path, params:)
 
       {
         uid: response.headers['uid'],
@@ -30,7 +30,7 @@ RSpec.describe 'Update a team' do
           needed_skills: []
         }
 
-        put team_path(team), params: params, headers: authentication_headers
+        put team_path(team), params:, headers: authentication_headers
 
         expect(response).to have_http_status(:ok)
       end
@@ -44,7 +44,7 @@ RSpec.describe 'Update a team' do
           needed_skills: []
         }
 
-        put team_path(team), params: params, headers: authentication_headers
+        put team_path(team), params:, headers: authentication_headers
 
         expect(response.parsed_body).to include(
           'name' => 'Happy Madison Productions',
@@ -87,7 +87,7 @@ RSpec.describe 'Update a team' do
         needed_skills: []
       }
 
-      put team_path(team), params: params
+      put(team_path(team), params:)
 
       expect(response).to have_http_status(:unauthorized)
     end
@@ -101,7 +101,7 @@ RSpec.describe 'Update a team' do
         needed_skills: []
       }
 
-      put team_path(team), params: params
+      put(team_path(team), params:)
 
       expect(response.parsed_body).to include(
         {

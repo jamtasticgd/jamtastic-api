@@ -1,0 +1,48 @@
+name: Test
+
+on:
+  push:
+
+jobs:
+  test:
+    name: Tests
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:14.8
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+
+    env:
+      POSTGRES_HOST: localhost
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      RAILS_ENV: test
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Install dependencies
+        run: bundle install --without development --deployment --jobs=3 --retry=3
+
+      - run: cp .env.example .env
+
+      - name: Setup Database
+        run: bundle exec rake db:create db:migrate
+
+      - name: Run tests
+        run: bundle exec rspec
+
+      - uses: qltysh/qlty-action/coverage@v2
+        with:
+          token: ${{secrets.QLTY_COVERAGE_TOKEN}}
+          files: coverage/.resultset.json

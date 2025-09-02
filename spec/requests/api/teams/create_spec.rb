@@ -9,7 +9,7 @@ RSpec.describe 'Create a team' do
         email: 'confirmed@jamtastic.org',
         password: '123456'
       }
-      post(user_session_path, params: params)
+      post(user_session_path, params:)
 
       {
         uid: response.headers['uid'],
@@ -27,7 +27,7 @@ RSpec.describe 'Create a team' do
           needed_skills: []
         }
 
-        post teams_path, params: params, headers: authentication_headers
+        post teams_path, params:, headers: authentication_headers
 
         expect(response).to have_http_status(:created)
       end
@@ -40,7 +40,7 @@ RSpec.describe 'Create a team' do
           needed_skills: []
         }
 
-        post teams_path, params: params, headers: authentication_headers
+        post teams_path, params:, headers: authentication_headers
 
         expect(response.parsed_body).to include(
           'name' => 'Happy Madison Productions',
@@ -80,7 +80,7 @@ RSpec.describe 'Create a team' do
         needed_skills: []
       }
 
-      post teams_path, params: params
+      post(teams_path, params:)
 
       expect(response).to have_http_status(:unauthorized)
     end
@@ -93,7 +93,7 @@ RSpec.describe 'Create a team' do
         needed_skills: []
       }
 
-      post teams_path, params: params
+      post(teams_path, params:)
 
       expect(response.parsed_body).to include(
         {

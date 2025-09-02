@@ -8,7 +8,7 @@ module Teams
 
     def create
       team = Team.find(contract_result[:team_id])
-      team_member = JoinTeam.new(user: current_user, team: team).call
+      team_member = JoinTeam.new(user: current_user, team:).call
 
       if team_member.persisted?
         render(json: EnrollmentsSerializer.render(team_member), status: :created)
