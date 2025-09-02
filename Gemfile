@@ -12,7 +12,7 @@ gem 'newrelic_rpm', '~> 9.2'
 gem 'pg', '~> 1.5'
 gem 'puma', '~> 6.3'
 gem 'rack-cors'
-gem 'rails', '~> 8.0'
+gem 'rails', '~> 7.2'
 gem 'sentry-rails', '~> 5.9'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -26,9 +26,11 @@ group :development do
   gem 'dockerfile-rails', '>= 1.4'
   gem 'listen', '~> 3.8'
   gem 'rubocop', '~> 1.51', require: false
+  gem 'rubocop-factory_bot', require: false
   gem 'rubocop-performance', '~> 1.18', require: false
   gem 'rubocop-rails', '~> 2.19', require: false
   gem 'rubocop-rspec', '~> 3.7', require: false
+  gem 'rubocop-rspec_rails', '~> 2.31', require: false
   gem 'web-console', '~> 4.2'
 end
 

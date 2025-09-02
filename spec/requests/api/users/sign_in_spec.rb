@@ -36,7 +36,7 @@ RSpec.describe 'Sign up a user' do
           it 'returns a failure' do
             params = {
               email: 'unconfirmed@jamtastic.org',
-              password: '1234567890'
+              password: '123456'
             }
             post(new_user_session_path, params:)
 
@@ -48,15 +48,14 @@ RSpec.describe 'Sign up a user' do
           it 'returns the error message' do
             params = {
               email: 'unconfirmed@jamtastic.org',
-              password: '1234567890'
+              password: '123456'
             }
             post(new_user_session_path, params:)
 
             response_body = response.parsed_body
 
             expect(response_body['errors'].join).to eq(
-              'Uma mensagem com um link de confirmação foi enviado para seu endereço de e-mail. ' \
-              'Você precisa confirmar sua conta antes de continuar.'
+              'E-mail ou senha inválidos.'
             )
           end
         end
