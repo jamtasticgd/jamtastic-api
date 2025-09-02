@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/ruby:3.2.2
+      - image: cimg/ruby:3.3.9
         environment:
             POSTGRES_HOST: localhost
             RAILS_ENV: test
