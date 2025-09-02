@@ -9,7 +9,7 @@ RSpec.describe 'Delete a team' do
         email: 'confirmed@jamtastic.org',
         password: '123456'
       }
-      post(user_session_path, params: params)
+      post(user_session_path, params:)
 
       {
         uid: response.headers['uid'],
@@ -23,7 +23,7 @@ RSpec.describe 'Delete a team' do
         it 'returns a no content status' do
           team = teams(:team_with_moderation)
 
-          delete team_path(team), headers: headers
+          delete(team_path(team), headers:)
 
           expect(response).to have_http_status(:no_content)
         end
@@ -37,7 +37,7 @@ RSpec.describe 'Delete a team' do
             email: 'billy.madison@jamtastic.org',
             password: '123456'
           }
-          post(user_session_path, params: params)
+          post(user_session_path, params:)
 
           headers = {
             uid: response.headers['uid'],
@@ -45,7 +45,7 @@ RSpec.describe 'Delete a team' do
             'access-token': response.headers['access-token']
           }
 
-          delete team_path(team), headers: headers
+          delete(team_path(team), headers:)
 
           expect(response).to have_http_status(:not_found)
         end
@@ -54,7 +54,7 @@ RSpec.describe 'Delete a team' do
 
     context 'but the team does not exist' do
       it 'returns a not found error' do
-        delete team_path('unknown_team_id'), headers: headers
+        delete(team_path('unknown_team_id'), headers:)
 
         expect(response).to have_http_status(:not_found)
       end

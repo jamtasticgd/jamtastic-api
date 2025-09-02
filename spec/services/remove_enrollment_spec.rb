@@ -9,10 +9,10 @@ RSpec.describe RemoveEnrollment do
             it 'removes the enrollment' do
               user = create(:user)
               team = create(:team, :with_admin)
-              user_enrollment = create(:team_member, team: team, user: user)
+              user_enrollment = create(:team_member, team:, user:)
 
               expect {
-                described_class.new(user: user, team_id: team.id, team_member_id: user_enrollment.id).call
+                described_class.new(user:, team_id: team.id, team_member_id: user_enrollment.id).call
               }.to change(TeamMember, :count).by(-1)
             end
           end
@@ -22,11 +22,11 @@ RSpec.describe RemoveEnrollment do
               it 'removes the enrollment' do
                 user = create(:user)
                 team = create(:team)
-                create(:team_member, :admin, team: team, user: user)
-                other_user_enrollment = create(:team_member, team: team)
+                create(:team_member, :admin, team:, user:)
+                other_user_enrollment = create(:team_member, team:)
 
                 expect {
-                  described_class.new(user: user, team_id: team.id, team_member_id: other_user_enrollment.id).call
+                  described_class.new(user:, team_id: team.id, team_member_id: other_user_enrollment.id).call
                 }.to change(TeamMember, :count).by(-1)
               end
             end
@@ -35,11 +35,11 @@ RSpec.describe RemoveEnrollment do
               it 'raises a can not remove others error' do
                 user = create(:user)
                 team = create(:team, :with_admin)
-                create(:team_member, team: team, user: user)
-                other_user_enrollment = create(:team_member, team: team)
+                create(:team_member, team:, user:)
+                other_user_enrollment = create(:team_member, team:)
 
                 expect {
-                  described_class.new(user: user, team_id: team.id, team_member_id: other_user_enrollment.id).call
+                  described_class.new(user:, team_id: team.id, team_member_id: other_user_enrollment.id).call
                 }.to raise_error(RemoveEnrollment::CantRemoveOthersError)
               end
             end
@@ -53,7 +53,7 @@ RSpec.describe RemoveEnrollment do
             user = admin_team_member.user
 
             expect {
-              described_class.new(user: user, team_id: team.id, team_member_id: admin_team_member.id).call
+              described_class.new(user:, team_id: team.id, team_member_id: admin_team_member.id).call
             }.to raise_error(RemoveEnrollment::CantRemoveAdminError)
           end
         end
@@ -65,7 +65,7 @@ RSpec.describe RemoveEnrollment do
           user = team.owner
 
           expect {
-            described_class.new(user: user, team_id: team.id, team_member_id: 'unknown_team_member_id').call
+            described_class.new(user:, team_id: team.id, team_member_id: 'unknown_team_member_id').call
           }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
@@ -76,7 +76,7 @@ RSpec.describe RemoveEnrollment do
         user = create(:user)
 
         expect {
-          described_class.new(user: user, team_id: 'unknown_team_id', team_member_id: 1).call
+          described_class.new(user:, team_id: 'unknown_team_id', team_member_id: 1).call
         }.to raise_error(ActiveRecord::RecordNotFound)
       end
     end

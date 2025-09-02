@@ -7,7 +7,7 @@ RSpec.describe Team do
     it 'returns the user of the owner of the team' do
       user = create(:user)
       team = create(:team)
-      create(:team_member, :admin, team: team, user: user)
+      create(:team_member, :admin, team:, user:)
 
       team_owner_user = team.owner
 
@@ -20,7 +20,7 @@ RSpec.describe Team do
       it 'returns true' do
         user = create(:user)
         team = create(:team)
-        create(:team_member, :admin, team: team, user: user)
+        create(:team_member, :admin, team:, user:)
 
         expect(team.owner?(user)).to be(true)
       end

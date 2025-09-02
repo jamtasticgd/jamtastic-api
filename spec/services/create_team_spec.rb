@@ -14,7 +14,7 @@ RSpec.describe CreateTeam, type: :service do
           needed_skills: []
         }
 
-        create_team = described_class.new(user: user, params: params)
+        create_team = described_class.new(user:, params:)
         team = create_team.call
 
         expect(team).to be_persisted
@@ -31,7 +31,7 @@ RSpec.describe CreateTeam, type: :service do
               needed_skills: %w[art code]
             }
 
-            create_team = described_class.new(user: user, params: params)
+            create_team = described_class.new(user:, params:)
             team = create_team.call
 
             expect(team.needed_skills.size).to eq(2)
@@ -48,7 +48,7 @@ RSpec.describe CreateTeam, type: :service do
               needed_skills: %w[art invalid]
             }
 
-            create_team = described_class.new(user: user, params: params)
+            create_team = described_class.new(user:, params:)
             team = create_team.call
 
             expect(team.needed_skills.size).to eq(1)
@@ -66,7 +66,7 @@ RSpec.describe CreateTeam, type: :service do
             needed_skills: []
           }
 
-          create_team = described_class.new(user: user, params: params)
+          create_team = described_class.new(user:, params:)
           team = create_team.call
 
           expect(team.needed_skills.size).to eq(0)
@@ -83,7 +83,7 @@ RSpec.describe CreateTeam, type: :service do
           needed_skills: []
         }
 
-        create_team = described_class.new(user: nil, params: params)
+        create_team = described_class.new(user: nil, params:)
         team = create_team.call
 
         expect(team).not_to be_persisted

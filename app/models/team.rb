@@ -8,7 +8,7 @@ class Team < ApplicationRecord
 
   delegate :id, to: :user, prefix: true
 
-  scope :owned, ->(user) { joins(:team_members).where(team_members: { user: user, kind: TeamMember::ADMIN }) }
+  scope :owned, ->(user) { joins(:team_members).where(team_members: { user:, kind: TeamMember::ADMIN }) }
 
   def owner?(other_user)
     owner.id == other_user&.id

@@ -77,7 +77,7 @@ RSpec.describe 'View a team' do
           email: 'confirmed@jamtastic.org',
           password: '123456'
         }
-        post(user_session_path, params: params)
+        post(user_session_path, params:)
 
         {
           uid: response.headers['uid'],
@@ -89,7 +89,7 @@ RSpec.describe 'View a team' do
       it 'returns the list of members with id' do
         team = teams(:team_with_moderation)
 
-        get team_path(team), headers: headers
+        get(team_path(team), headers:)
 
         expect(response.parsed_body['members']).to include(
           a_hash_including(
@@ -101,7 +101,7 @@ RSpec.describe 'View a team' do
       it 'returns the list of pending members with id' do
         team = teams(:team_with_moderation)
 
-        get team_path(team), headers: headers
+        get(team_path(team), headers:)
 
         expect(response.parsed_body['pending_members']).to include(
           a_hash_including(
@@ -117,7 +117,7 @@ RSpec.describe 'View a team' do
           email: 'unconfirmed@jamtastic.org',
           password: '123456'
         }
-        post(user_session_path, params: params)
+        post(user_session_path, params:)
 
         {
           uid: response.headers['uid'],
@@ -132,7 +132,7 @@ RSpec.describe 'View a team' do
             email: 'zohan.dvir@jamtastic.org',
             password: '123456'
           }
-          post(user_session_path, params: params)
+          post(user_session_path, params:)
 
           headers = {
             uid: response.headers['uid'],
@@ -142,7 +142,7 @@ RSpec.describe 'View a team' do
 
           team = teams(:team_with_moderation)
 
-          get team_path(team), headers: headers
+          get(team_path(team), headers:)
 
           expect(response.parsed_body).to include(
             'enrollment_id' => '6d061e04-65d2-5cf6-8ef6-640dfcdec045'
@@ -154,7 +154,7 @@ RSpec.describe 'View a team' do
         it 'does not return the enrollment id' do
           team = teams(:team_with_moderation)
 
-          get team_path(team), headers: headers
+          get(team_path(team), headers:)
 
           expect(response.parsed_body).not_to include('enrollment_id')
         end
@@ -163,7 +163,7 @@ RSpec.describe 'View a team' do
       it 'returns the list of members without id' do
         team = teams(:team_with_moderation)
 
-        get team_path(team), headers: headers
+        get(team_path(team), headers:)
 
         expect(response.parsed_body['members']).not_to include(
           a_hash_including(
@@ -175,7 +175,7 @@ RSpec.describe 'View a team' do
       it 'does not return the list of pending members' do
         team = teams(:team_with_moderation)
 
-        get team_path(team), headers: headers
+        get(team_path(team), headers:)
 
         expect(response.parsed_body).not_to include('pending_members')
       end

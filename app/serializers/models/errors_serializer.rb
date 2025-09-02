@@ -9,7 +9,7 @@ module Models
     end
 
     def as_json(_options = nil)
-      { errors: errors }
+      { errors: }
     end
 
     private

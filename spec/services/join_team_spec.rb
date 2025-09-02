@@ -11,7 +11,7 @@ RSpec.describe JoinTeam, type: :service do
             team = create(:team)
             user = create(:user)
 
-            team_member = described_class.new(team: team, user: user).call
+            team_member = described_class.new(team:, user:).call
 
             expect(team_member).to be_persisted
           end
@@ -21,7 +21,7 @@ RSpec.describe JoinTeam, type: :service do
               team = create(:team, :approve_new_members)
               user = create(:user)
 
-              team_member = described_class.new(team: team, user: user).call
+              team_member = described_class.new(team:, user:).call
 
               expect(team_member).not_to be_approved
             end
@@ -32,7 +32,7 @@ RSpec.describe JoinTeam, type: :service do
               team = create(:team)
               user = create(:user)
 
-              team_member = described_class.new(team: team, user: user).call
+              team_member = described_class.new(team:, user:).call
 
               expect(team_member).to be_approved
             end
@@ -43,10 +43,10 @@ RSpec.describe JoinTeam, type: :service do
           it 'raises an already a member error' do
             user = create(:user)
             team = create(:team)
-            create(:team_member, :admin, team: team, user: user)
+            create(:team_member, :admin, team:, user:)
 
             expect {
-              described_class.new(team: team, user: user).call
+              described_class.new(team:, user:).call
             }.to raise_error(JoinTeam::AlreadyAMember)
           end
         end
@@ -55,10 +55,10 @@ RSpec.describe JoinTeam, type: :service do
           it 'raises an already a member error' do
             team = create(:team)
             user = create(:user)
-            described_class.new(team: team, user: user).call
+            described_class.new(team:, user:).call
 
             expect {
-              described_class.new(team: team.reload, user: user).call
+              described_class.new(team: team.reload, user:).call
             }.to raise_error(JoinTeam::AlreadyAMember)
           end
         end
@@ -69,7 +69,7 @@ RSpec.describe JoinTeam, type: :service do
           user = create(:user)
 
           expect {
-            described_class.new(team: nil, user: user).call
+            described_class.new(team: nil, user:).call
           }.to raise_error(ArgumentError)
         end
       end
@@ -80,7 +80,7 @@ RSpec.describe JoinTeam, type: :service do
         team = create(:team)
 
         expect {
-          described_class.new(team: team, user: nil).call
+          described_class.new(team:, user: nil).call
         }.to raise_error(ArgumentError)
       end
     end

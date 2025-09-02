@@ -18,7 +18,7 @@ RSpec.describe UpdateTeam, type: :service do
               needed_skills: ['art']
             }
 
-            updated_team = described_class.new(user: user, params: params).call
+            updated_team = described_class.new(user:, params:).call
 
             expect(updated_team.valid?).to be(true)
           end
@@ -30,7 +30,7 @@ RSpec.describe UpdateTeam, type: :service do
             user = team.users.first
             params = { id: team.id, name: nil }
 
-            updated_team = described_class.new(user: user, params: params).call
+            updated_team = described_class.new(user:, params:).call
 
             expect(updated_team.valid?).to be(false)
           end
@@ -43,7 +43,7 @@ RSpec.describe UpdateTeam, type: :service do
           params = { id: 'unknown_team_id' }
 
           expect {
-            described_class.new(user: user, params: params).call
+            described_class.new(user:, params:).call
           }.to raise_error(ActiveRecord::RecordNotFound)
         end
       end
