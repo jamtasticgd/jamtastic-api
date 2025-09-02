@@ -9,9 +9,9 @@ The complete endpoint documentation can be found [here](https://documenter.getpo
 
 ## Setup
 This project is currently using
-- Ruby 3.3
-- Rails 7.0
-- Postgres 12
+- Ruby 3.4
+- Rails 7.2
+- Postgres 17
 
 To make the project setup, first clone the project
 
