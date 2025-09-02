@@ -1,6 +1,7 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/jamtasticgd/jamtastic-api/tree/main.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/jamtasticgd/jamtastic-api/tree/main)
+[![Tests](https://github.com/jamtasticgd/jamtastic-api/actions/workflows/test.yml/badge.svg)](https://github.com/jamtasticgd/jamtastic-api/actions/workflows/test.yml)
 [![Maintainability](https://qlty.sh/gh/jamtasticgd/projects/jamtastic-api/maintainability.svg)](https://qlty.sh/gh/jamtasticgd/projects/jamtastic-api)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/8464b62ccad16bde6805/test_coverage)](https://codeclimate.com/github/jamtasticgd/jamtastic-api/test_coverage)
+[![Code Coverage](https://qlty.sh/gh/jamtasticgd/projects/jamtastic-api/coverage.svg)](https://qlty.sh/gh/jamtasticgd/projects/jamtastic-api)
+
 # Jamtastic API
 This project contains all API related code for jamtastic.org tools and website.
 
@@ -8,7 +9,7 @@ The complete endpoint documentation can be found [here](https://documenter.getpo
 
 ## Setup
 This project is currently using
-- Ruby 3.2
+- Ruby 3.3
 - Rails 7.0
 - Postgres 12
 
