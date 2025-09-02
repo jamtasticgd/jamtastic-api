@@ -16,7 +16,7 @@ AllCops:
     - 'spec/rails_helper.rb'
     - 'spec/spec_helper.rb'
     - 'vendor/**/*'
-  TargetRubyVersion: 3.3.9
+  TargetRubyVersion: 3.4.5
 
 Layout/ArgumentAlignment:
   EnforcedStyle: with_fixed_indentation
