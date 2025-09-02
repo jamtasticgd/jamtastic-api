@@ -1,5 +1,7 @@
 name: Test
-on: push
+
+on:
+  push:
 
 jobs:
   test:
@@ -42,5 +44,5 @@ jobs:
 
       - uses: qltysh/qlty-action/coverage@v2
         with:
-          token: {{secrets.QLTY_COVERAGE_TOKEN}}
+          token: ${{secrets.QLTY_COVERAGE_TOKEN}}
           files: coverage/.resultset.json
