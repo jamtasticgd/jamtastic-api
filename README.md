@@ -1,5 +1,5 @@
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/jamtasticgd/jamtastic-api/tree/main.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/jamtasticgd/jamtastic-api/tree/main)
-[![Maintainability](https://api.codeclimate.com/v1/badges/8464b62ccad16bde6805/maintainability)](https://codeclimate.com/github/jamtasticgd/jamtastic-api/maintainability)
+[![Maintainability](https://qlty.sh/gh/jamtasticgd/projects/jamtastic-api/maintainability.svg)](https://qlty.sh/gh/jamtasticgd/projects/jamtastic-api)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/8464b62ccad16bde6805/test_coverage)](https://codeclimate.com/github/jamtasticgd/jamtastic-api/test_coverage)
 # Jamtastic API
 This project contains all API related code for jamtastic.org tools and website.
