@@ -5,6 +5,10 @@ require 'rails_helper'
 RSpec.describe 'Groups' do
   describe 'update a group member count' do
     context 'when the given group exist' do
+      before do
+        create(:telegram_group)
+      end
+
       context 'and all correct params are given' do
         it 'returns the updated group' do
           params = { member_count: 330 }
@@ -47,7 +51,7 @@ RSpec.describe 'Groups' do
 
           put(group_path('telegram'), params:)
 
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
     end

@@ -32,8 +32,21 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  # config.fixture_paths = ["#{::Rails.root}/spec/fixtures"]
+  # config.fixtures_path = "#{::Rails.root}/spec/fixtures"
   # config.global_fixtures = :all
+  
+  # Enable fixtures for RSpec 3.13
+  config.include ActiveSupport::Testing::FileFixtures
+  
+    # FactoryBot is already configured and available
+  
+  # Try to enable fixtures using RSpec 3.13 compatible method
+  if config.respond_to?(:fixtures_path=)
+    config.fixtures_path = "#{::Rails.root}/spec/fixtures"
+    config.global_fixtures = :all
+  end
+  
+  # FactoryBot is already configured and available
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

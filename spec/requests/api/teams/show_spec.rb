@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'View a team' do
   context 'when the team exist' do
     it 'returns an ok status' do
-      team = teams(:team_with_moderation)
+      team = create(:team_with_moderation)
 
       get team_path(team)
 
@@ -13,7 +13,7 @@ RSpec.describe 'View a team' do
     end
 
     it 'returns the team name' do
-      team = teams(:team_with_moderation)
+      team = create(:team_with_moderation)
 
       get team_path(team)
 
@@ -23,7 +23,7 @@ RSpec.describe 'View a team' do
     end
 
     it 'returns the team description' do
-      team = teams(:team_with_moderation)
+      team = create(:team_with_moderation)
 
       get team_path(team)
 
@@ -33,7 +33,7 @@ RSpec.describe 'View a team' do
     end
 
     it 'returns the team creation date' do
-      team = teams(:team_with_moderation)
+      team = create(:team_with_moderation)
 
       get team_path(team)
 
@@ -41,7 +41,7 @@ RSpec.describe 'View a team' do
     end
 
     it 'returns the team update date' do
-      team = teams(:team_with_moderation)
+      team = create(:team_with_moderation)
 
       get team_path(team)
 
@@ -49,7 +49,7 @@ RSpec.describe 'View a team' do
     end
 
     it 'returns the team needed skills' do
-      team = teams(:team_with_moderation)
+      team = create(:team_with_moderation)
 
       get team_path(team)
 
@@ -59,7 +59,7 @@ RSpec.describe 'View a team' do
     end
 
     it 'returns the team owner name' do
-      team = teams(:team_with_moderation)
+      team = create(:team_with_moderation)
 
       get team_path(team)
 
@@ -87,25 +87,28 @@ RSpec.describe 'View a team' do
       end
 
       it 'returns the list of members with id' do
-        team = teams(:team_with_moderation)
+        team = create(:team_with_moderation)
 
         get(team_path(team), headers:)
 
         expect(response.parsed_body['members']).to include(
           a_hash_including(
-            'id' => '6d061e04-65d2-5cf6-8ef6-640dfcdec045'
+            'id' => team.team_members.first.id
           )
         )
       end
 
       it 'returns the list of pending members with id' do
-        team = teams(:team_with_moderation)
+        team = create(:team_with_moderation)
+        # Add a pending member
+        pending_user = create(:user, :unconfirmed)
+        create(:team_member, team: team, user: pending_user, approved: false)
 
         get(team_path(team), headers:)
 
         expect(response.parsed_body['pending_members']).to include(
           a_hash_including(
-            'id' => 'f3bfcf2c-5809-5be1-9203-dfd224fd8e88'
+            'id' => team.team_members.pending.first.id
           )
         )
       end
@@ -140,19 +143,22 @@ RSpec.describe 'View a team' do
             'access-token': response.headers['access-token']
           }
 
-          team = teams(:team_with_moderation)
+          team = create(:team_with_moderation)
+          # Create a team member for the authenticated user
+          zohan_user = User.find_by(email: 'zohan.dvir@jamtastic.org')
+          create(:team_member, team: team, user: zohan_user, approved: true)
 
           get(team_path(team), headers:)
 
           expect(response.parsed_body).to include(
-            'enrollment_id' => '6d061e04-65d2-5cf6-8ef6-640dfcdec045'
+            'enrollment_id' => team.team_members.find_by(user: zohan_user).id
           )
         end
       end
 
       context 'and the user is not a member of the team' do
         it 'does not return the enrollment id' do
-          team = teams(:team_with_moderation)
+          team = create(:team_with_moderation)
 
           get(team_path(team), headers:)
 
@@ -161,7 +167,7 @@ RSpec.describe 'View a team' do
       end
 
       it 'returns the list of members without id' do
-        team = teams(:team_with_moderation)
+        team = create(:team_with_moderation)
 
         get(team_path(team), headers:)
 
@@ -173,7 +179,7 @@ RSpec.describe 'View a team' do
       end
 
       it 'does not return the list of pending members' do
-        team = teams(:team_with_moderation)
+        team = create(:team_with_moderation)
 
         get(team_path(team), headers:)
 
