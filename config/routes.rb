@@ -13,6 +13,15 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations'
   }
 
+  # itch.io OAuth routes
+  namespace :users do
+    get 'itchio_oauth/authorize', to: 'itchio_oauth#authorize'
+    get 'itchio_oauth/callback', to: 'itchio_oauth#callback'
+    post 'itchio_oauth/callback', to: 'itchio_oauth#callback'
+    post 'itchio_oauth/link_account', to: 'itchio_oauth#link_account'
+    delete 'itchio_oauth/unlink_account', to: 'itchio_oauth#unlink_account'
+  end
+
   resources :groups, only: [:update]
   resources :companies, only: [:create]
   resources :skills, only: [:index]

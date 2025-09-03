@@ -537,6 +537,175 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Error'
+  /users/itchio_oauth/authorize:
+    get:
+      tags:
+        - Users
+      summary: Start itch.io OAuth flow
+      description: Redirects user to itch.io authorization page to start OAuth flow
+      responses:
+        '302':
+          description: Redirects to itch.io authorization page
+        '503':
+          description: itch.io OAuth not configured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/itchio_oauth/callback:
+    post:
+      tags:
+        - Users
+      summary: Process itch.io OAuth callback
+      description: Processes the OAuth callback from itch.io with access token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access_token:
+                  type: string
+                  description: itch.io access token
+                state:
+                  type: string
+                  description: OAuth state parameter
+              required:
+                - access_token
+                - state
+      responses:
+        '200':
+          description: Authentication successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      user:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          email:
+                            type: string
+                          name:
+                            type: string
+                          itchio_username:
+                            type: string
+                          itchio_linked:
+                            type: boolean
+                          created_at:
+                            type: string
+                            format: date-time
+                          updated_at:
+                            type: string
+                            format: date-time
+                      tokens:
+                        type: object
+                        properties:
+                          access-token:
+                            type: string
+                          client:
+                            type: string
+                          uid:
+                            type: string
+                          expiry:
+                            type: string
+        '400':
+          description: Invalid parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/itchio_oauth/link_account:
+    post:
+      tags:
+        - Users
+      summary: Link itch.io account
+      description: Links an itch.io account to the current authenticated user
+      security:
+        - bearer_auth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                access_token:
+                  type: string
+                  description: itch.io access token
+              required:
+                - access_token
+      responses:
+        '200':
+          description: Account linked successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                      email:
+                        type: string
+                      name:
+                        type: string
+                      itchio_username:
+                        type: string
+                      itchio_linked:
+                        type: boolean
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: itch.io account already linked to another user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /users/itchio_oauth/unlink_account:
+    delete:
+      tags:
+        - Users
+      summary: Unlink itch.io account
+      description: Unlinks the itch.io account from the current user
+      security:
+        - bearer_auth: []
+      responses:
+        '200':
+          description: Account unlinked successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
 components:
   securitySchemes:
     bearer_auth:

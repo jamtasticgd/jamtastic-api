@@ -14,11 +14,24 @@ git clone https://github.com/jamtasticgd/jamtastic-api.git
 cd jamtastic-api
 ./bin/setup
 
+# Configure itch.io OAuth (optional)
+./scripts/setup_env.sh
+
 # Start development server
 ./scripts/dev.sh
 ```
 
 The API will be available at `http://localhost:3000`
+
+### itch.io OAuth Setup
+
+To enable itch.io authentication:
+
+1. Register your app at [itch.io OAuth Applications](https://itch.io/user/settings/oauth)
+2. Run `./scripts/setup_env.sh` to configure your credentials
+3. Set the redirect URI in itch.io to: `http://localhost:3000/users/itchio_oauth/callback`
+
+See [itch.io OAuth Documentation](docs/ITCHIO_OAUTH.md) for detailed setup instructions.
 
 ## Documentation
 
@@ -80,6 +93,12 @@ make clean         # Clean temporary files
 - `POST /users` - User registration
 - `POST /users/sign_in` - User login
 - `DELETE /users/sign_out` - User logout
+
+### itch.io OAuth Integration
+- `GET /users/itchio_oauth/authorize` - Start itch.io OAuth flow
+- `GET /users/itchio_oauth/callback` - OAuth callback handler
+- `POST /users/itchio_oauth/link_account` - Link itch.io account
+- `DELETE /users/itchio_oauth/unlink_account` - Unlink itch.io account
 
 ### Core Resources
 - `GET /skills` - List available skills

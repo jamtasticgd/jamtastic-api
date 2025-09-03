@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_09_01_103702) do
+ActiveRecord::Schema[7.0].define(version: 2025_09_01_115628) do
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -96,8 +96,13 @@ ActiveRecord::Schema[7.0].define(version: 2025_09_01_103702) do
     t.string "uid", default: "", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "itchio_id"
+    t.string "itchio_username"
+    t.text "itchio_access_token"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["itchio_id"], name: "index_users_on_itchio_id", unique: true
+    t.index ["itchio_username"], name: "index_users_on_itchio_username"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
