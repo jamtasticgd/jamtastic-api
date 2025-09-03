@@ -10,12 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_01_103702) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "pg_catalog.plpgsql"
-  enable_extension "pgcrypto"
-
-  create_table "companies", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+ActiveRecord::Schema[7.2].define(version: 2025_09_01_103708) do
+  create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "facebook"

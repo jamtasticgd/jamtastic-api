@@ -15,7 +15,6 @@ gem 'rack-cors'
 gem 'rails', '~> 7.2'
 gem 'sentry-rails', '~> 5.9'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-gem 'erb'
 
 group :development, :test do
   gem 'dotenv-rails', '~> 2.8.1'
