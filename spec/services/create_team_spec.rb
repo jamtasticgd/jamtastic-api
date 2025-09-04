@@ -3,6 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe CreateTeam, type: :service do
+  before do
+    create(:art_skill)
+    create(:code_skill)
+    create(:writing_skill)
+  end
+
   describe '#call' do
     context 'when a valid user is informed' do
       it 'creates a new team' do

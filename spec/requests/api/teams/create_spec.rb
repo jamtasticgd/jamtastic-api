@@ -3,10 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Create a team' do
+  before do
+    create(:confirmed_user)
+  end
+
   context 'when the authorization info is informed' do
     let(:authentication_headers) do
       params = {
-        email: 'confirmed@jamtastic.org',
+        email: 'confirmed-test@jamtastic.org',
         password: '123456'
       }
       post(user_session_path, params:)
@@ -54,7 +58,7 @@ RSpec.describe 'Create a team' do
       it 'returns an unprocessable entity status code' do
         post teams_path, params: {}, headers: authentication_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it 'returns the error message' do

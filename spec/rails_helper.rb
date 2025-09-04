@@ -35,16 +35,7 @@ RSpec.configure do |config|
   # config.fixtures_path = "#{::Rails.root}/spec/fixtures"
   # config.global_fixtures = :all
   
-  # Enable fixtures for RSpec 3.13
-  config.include ActiveSupport::Testing::FileFixtures
-  
-    # FactoryBot is already configured and available
-  
-  # Try to enable fixtures using RSpec 3.13 compatible method
-  if config.respond_to?(:fixtures_path=)
-    config.fixtures_path = "#{::Rails.root}/spec/fixtures"
-    config.global_fixtures = :all
-  end
+  # FactoryBot is already configured and available
   
   # FactoryBot is already configured and available
 

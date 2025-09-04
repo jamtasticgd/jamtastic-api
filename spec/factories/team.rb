@@ -21,10 +21,10 @@ FactoryBot.define do
       approve_new_members { true }
 
       after(:create) do |team|
-        user = User.find_or_create_by(email: 'confirmed@jamtastic.org') do |u|
+        user = User.find_or_create_by(email: 'confirmed-test@jamtastic.org') do |u|
           u.name = 'Confirmed user'
           u.password = '123456'
-          u.uid = 'confirmed@jamtastic.org'
+          u.uid = 'confirmed-test@jamtastic.org'
           u.confirmed_at = 1.day.ago
         end
 

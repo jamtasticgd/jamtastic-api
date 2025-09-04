@@ -3,6 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe 'View a team' do
+  before do
+    create(:confirmed_user)
+    create(:unconfirmed_user)
+    create(:zohan_dvir)
+  end
+
   context 'when the team exist' do
     it 'returns an ok status' do
       team = create(:team_with_moderation)
@@ -74,7 +80,7 @@ RSpec.describe 'View a team' do
     context 'and the user is owner of the team' do
       let(:headers) do
         params = {
-          email: 'confirmed@jamtastic.org',
+          email: 'confirmed-test@jamtastic.org',
           password: '123456'
         }
         post(user_session_path, params:)
@@ -117,7 +123,7 @@ RSpec.describe 'View a team' do
     context 'but the user is not owner of the team' do
       let(:headers) do
         params = {
-          email: 'unconfirmed@jamtastic.org',
+          email: 'unconfirmed-test@jamtastic.org',
           password: '123456'
         }
         post(user_session_path, params:)

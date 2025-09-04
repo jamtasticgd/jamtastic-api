@@ -3,10 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Sign out a user' do
+  before do
+    create(:confirmed_user)
+  end
+
   context 'when the user is logged in' do
     it 'returns an ok status' do
       params = {
-        email: 'confirmed@jamtastic.org',
+        email: 'confirmed-test@jamtastic.org',
         password: '123456'
       }
       post(user_session_path, params:)
@@ -24,7 +28,7 @@ RSpec.describe 'Sign out a user' do
 
     it 'returns a success' do
       params = {
-        email: 'confirmed@jamtastic.org',
+        email: 'confirmed-test@jamtastic.org',
         password: '123456'
       }
       post(user_session_path, params:)
@@ -44,7 +48,7 @@ RSpec.describe 'Sign out a user' do
   context 'when the user is logged out' do
     it 'returns a not found error' do
       headers = {
-        uid: 'confirmed@jamtastic.org',
+        uid: 'confirmed-test@jamtastic.org',
         client: 'q5m14mEsAQmd_8umNk5rqg',
         'access-token': '5x2J83hTFK8zK_yri-sXiA'
       }
@@ -56,7 +60,7 @@ RSpec.describe 'Sign out a user' do
 
     it 'returns a failure' do
       headers = {
-        uid: 'confirmed@jamtastic.org',
+        uid: 'confirmed-test@jamtastic.org',
         client: 'q5m14mEsAQmd_8umNk5rqg',
         'access-token': '5x2J83hTFK8zK_yri-sXiA'
       }

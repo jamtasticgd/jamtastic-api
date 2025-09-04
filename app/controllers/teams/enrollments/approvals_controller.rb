@@ -7,7 +7,7 @@ module Teams
       rescue_from ApproveEnrollment::AlreadyApprovedError do
         error_message = I18n.t('approvals.errors.already_approved')
 
-        render(json: ErrorSerializer.render(error_message), status: :unprocessable_entity)
+        render(json: ErrorSerializer.render(error_message), status: :unprocessable_content)
       end
 
       before_action :authenticate_user!

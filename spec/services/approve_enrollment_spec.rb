@@ -5,7 +5,7 @@ RSpec.describe ApproveEnrollment, type: :service do
     context 'when a valid enrollment is informed' do
       context 'and the member is not approved' do
         it 'approves the member' do
-          team_member = team_members(:pending_member)
+          team_member = create(:team_member, :pending)
 
           described_class.new(team_member).call
           team_member.reload
@@ -16,7 +16,7 @@ RSpec.describe ApproveEnrollment, type: :service do
 
       context 'but the member is already approved' do
         it 'raises an already approved error' do
-          team_member = team_members(:approved_member)
+          team_member = create(:team_member, :approved)
 
           expect {
             described_class.new(team_member).call

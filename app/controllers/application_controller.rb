@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
 
   rescue_from ActiveRecord::RecordNotFound, with: -> { head :not_found }
   rescue_from InvalidContractError do
-    render(json: Contracts::ErrorsSerializer.render(contract_result), status: :unprocessable_entity)
+    render(json: Contracts::ErrorsSerializer.render(contract_result), status: :unprocessable_content)
   end
 
   def set_sentry_context

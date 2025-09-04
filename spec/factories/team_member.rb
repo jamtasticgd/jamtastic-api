@@ -14,6 +14,10 @@ FactoryBot.define do
       approved { true }
     end
 
+    trait :pending do
+      approved { false }
+    end
+
     # Specific members that match fixture data
     factory :pending_member do
       approved { false }
