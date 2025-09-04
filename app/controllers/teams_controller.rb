@@ -27,7 +27,7 @@ class TeamsController < ApplicationController
     if team.persisted?
       render(json: TeamsSerializer.render(team), status: :created)
     else
-      render(json: Models::ErrorsSerializer.render(team), status: :unprocessable_entity)
+      render(json: Models::ErrorsSerializer.render(team), status: :unprocessable_content)
     end
   end
 
@@ -37,7 +37,7 @@ class TeamsController < ApplicationController
     if team.valid?
       render(json: TeamsSerializer.render(team), status: :ok)
     else
-      render(json: Models::ErrorsSerializer.render(team), status: :unprocessable_entity)
+      render(json: Models::ErrorsSerializer.render(team), status: :unprocessable_content)
     end
   end
 

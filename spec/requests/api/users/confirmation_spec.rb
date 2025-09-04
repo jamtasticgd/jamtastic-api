@@ -8,7 +8,7 @@ RSpec.describe 'Confirm the user' do
       it 'returns an ok status' do
         travel_to 1.year.from_now
 
-        user = users(:unconfirmed_user)
+        user = create(:unconfirmed_user)
         params = { confirmation_token: user.confirmation_token }
 
         get user_confirmation_path(params)
@@ -17,7 +17,7 @@ RSpec.describe 'Confirm the user' do
       end
 
       it 'returns a confirmation message' do
-        user = users(:unconfirmed_user)
+        user = create(:unconfirmed_user)
         params = { confirmation_token: user.confirmation_token }
 
         get user_confirmation_path(params)
@@ -31,7 +31,7 @@ RSpec.describe 'Confirm the user' do
 
     context 'and the user is confirmed' do
       it 'returns an ok status' do
-        user = users(:confirmed_user)
+        user = create(:confirmed_user)
         params = { confirmation_token: user.confirmation_token }
 
         get user_confirmation_path(params)

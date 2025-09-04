@@ -3,10 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe 'Remove a member from the team' do
+  before do
+    create(:confirmed_user)
+    create(:billy_madison)
+  end
+
+  let(:billy_user) { User.find_by(email: 'billy.madison@jamtastic.org') }
+
   context 'when the authorization info is informed' do
     let(:authentication_headers) do
       params = {
-        email: 'confirmed@jamtastic.org',
+        email: 'confirmed-test@jamtastic.org',
         password: '123456'
       }
       post(user_session_path, params:)
@@ -20,8 +27,8 @@ RSpec.describe 'Remove a member from the team' do
 
     context 'when the enrollment is deleted' do
       it 'returns a no content status' do
-        team = teams(:team_with_moderation)
-        team_member = team.team_members.first
+        team = create(:team_with_moderation)
+        team_member = create(:team_member, team: team, user: billy_user, approved: true)
 
         delete team_enrollment_path(team, team_member), headers: authentication_headers
 
@@ -34,7 +41,7 @@ RSpec.describe 'Remove a member from the team' do
         remove_enrollment_service = instance_double(RemoveEnrollment)
         allow(remove_enrollment_service).to receive(:call).and_raise(ActiveRecord::RecordNotFound)
         allow(RemoveEnrollment).to receive(:new).and_return(remove_enrollment_service)
-        team = teams(:team_with_moderation)
+        team = create(:team_with_moderation)
         team_member = team.team_members.first
 
         delete team_enrollment_path(team, team_member), headers: authentication_headers
@@ -48,14 +55,14 @@ RSpec.describe 'Remove a member from the team' do
         remove_enrollment_service = instance_double(RemoveEnrollment)
         allow(remove_enrollment_service).to receive(:call).and_raise(RemoveEnrollment::CantRemoveAdminError)
         allow(RemoveEnrollment).to receive(:new).and_return(remove_enrollment_service)
-        team = teams(:team_with_moderation)
+        team = create(:team_with_moderation)
         team_member = team.team_members.first
 
         delete team_enrollment_path(team, team_member), headers: authentication_headers
       end
 
       it 'returns a unprocessable entity status' do
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it 'returns the error message' do
@@ -72,14 +79,14 @@ RSpec.describe 'Remove a member from the team' do
         remove_enrollment_service = instance_double(RemoveEnrollment)
         allow(remove_enrollment_service).to receive(:call).and_raise(RemoveEnrollment::CantRemoveOthersError)
         allow(RemoveEnrollment).to receive(:new).and_return(remove_enrollment_service)
-        team = teams(:team_with_moderation)
+        team = create(:team_with_moderation)
         team_member = team.team_members.first
 
         delete team_enrollment_path(team, team_member), headers: authentication_headers
       end
 
       it 'returns a unprocessable entity status' do
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it 'returns the error message' do

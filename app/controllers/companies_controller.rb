@@ -9,7 +9,7 @@ class CompaniesController < ApplicationController
     if company.save
       render(json: CompaniesSerializer.render(company), status: :created)
     else
-      render(json: Models::ErrorsSerializer.render(company), status: :unprocessable_entity)
+      render(json: Models::ErrorsSerializer.render(company), status: :unprocessable_content)
     end
   end
 end

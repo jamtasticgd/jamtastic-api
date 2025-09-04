@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
     if group.update(member_count: contract_result[:member_count])
       render(json: GroupsSerializer.render(group), status: :ok)
     else
-      render(json: Models::ErrorsSerializer.render(group), status: :unprocessable_entity)
+      render(json: Models::ErrorsSerializer.render(group), status: :unprocessable_content)
     end
   end
 end

@@ -46,7 +46,7 @@ RSpec.describe 'Companies' do
         end
 
         it 'returns an unprocessable entity error' do
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
 
         it 'returns the error message' do
@@ -74,7 +74,7 @@ RSpec.describe 'Companies' do
     end
 
     it 'returns an unprocessable entity error' do
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     it 'returns the error message' do

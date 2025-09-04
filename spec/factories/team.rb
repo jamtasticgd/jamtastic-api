@@ -13,5 +13,23 @@ FactoryBot.define do
     trait :approve_new_members do
       approve_new_members { true }
     end
+
+    # Specific team that matches fixture data
+    factory :team_with_moderation do
+      name { 'Happy Madison Productions' }
+      description { 'We are a team making great games and movies.' }
+      approve_new_members { true }
+
+      after(:create) do |team|
+        user = User.find_or_create_by(email: 'confirmed-test@jamtastic.org') do |u|
+          u.name = 'Confirmed user'
+          u.password = '123456'
+          u.uid = 'confirmed-test@jamtastic.org'
+          u.confirmed_at = 1.day.ago
+        end
+
+        create(:team_member, :admin, team: team, user: user)
+      end
+    end
   end
 end

@@ -3,10 +3,15 @@
 require 'rails_helper'
 
 RSpec.describe 'Delete a team' do
+  before do
+    create(:confirmed_user)
+    create(:billy_madison)
+  end
+
   context 'when the authorization info is informed' do
     let(:headers) do
       params = {
-        email: 'confirmed@jamtastic.org',
+        email: 'confirmed-test@jamtastic.org',
         password: '123456'
       }
       post(user_session_path, params:)
@@ -21,7 +26,7 @@ RSpec.describe 'Delete a team' do
     context 'and the team exists' do
       context 'and the user is the owner of the team' do
         it 'returns a no content status' do
-          team = teams(:team_with_moderation)
+          team = create(:team_with_moderation)
 
           delete(team_path(team), headers:)
 
@@ -31,7 +36,7 @@ RSpec.describe 'Delete a team' do
 
       context 'but the user is not the owner of the team' do
         it 'returns a not found error' do
-          team = teams(:team_with_moderation)
+          team = create(:team_with_moderation)
 
           params = {
             email: 'billy.madison@jamtastic.org',
@@ -63,7 +68,7 @@ RSpec.describe 'Delete a team' do
 
   context 'when the authorization info is not informed' do
     it 'returns an unauthorized error' do
-      team = teams(:team_with_moderation)
+      team = create(:team_with_moderation)
 
       delete team_path(team)
 
@@ -71,7 +76,7 @@ RSpec.describe 'Delete a team' do
     end
 
     it 'returns the error message' do
-      team = teams(:team_with_moderation)
+      team = create(:team_with_moderation)
 
       delete team_path(team)
 

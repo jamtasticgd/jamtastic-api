@@ -3,10 +3,16 @@
 require 'rails_helper'
 
 RSpec.describe CreateTeam, type: :service do
+  before do
+    create(:art_skill)
+    create(:code_skill)
+    create(:writing_skill)
+  end
+
   describe '#call' do
     context 'when a valid user is informed' do
       it 'creates a new team' do
-        user = users(:confirmed_user)
+        user = create(:confirmed_user)
         params = {
           name: 'Happy Madison Productions',
           description: 'We are a team making great games and movies.',
@@ -23,7 +29,7 @@ RSpec.describe CreateTeam, type: :service do
       context 'and the needed skills are informed' do
         context 'and they are all valid skills' do
           it 'creates needed skills for the team' do
-            user = users(:confirmed_user)
+            user = create(:confirmed_user)
             params = {
               name: 'Happy Madison Productions',
               description: 'We are a team making great games and movies.',
@@ -40,7 +46,7 @@ RSpec.describe CreateTeam, type: :service do
 
         context 'and there are some invalid skills' do
           it 'creates only the valid needed skills for the team' do
-            user = users(:confirmed_user)
+            user = create(:confirmed_user)
             params = {
               name: 'Happy Madison Productions',
               description: 'We are a team making great games and movies.',
@@ -58,7 +64,7 @@ RSpec.describe CreateTeam, type: :service do
 
       context 'and the needed skills are not informed' do
         it 'does not create needed skills for the team' do
-          user = users(:confirmed_user)
+          user = create(:confirmed_user)
           params = {
             name: 'Happy Madison Productions',
             description: 'We are a team making great games and movies.',
