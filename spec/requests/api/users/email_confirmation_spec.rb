@@ -3,20 +3,25 @@
 require 'rails_helper'
 
 RSpec.describe 'Send email confirmation message' do
+  before do
+    create(:confirmed_user)
+    create(:unconfirmed_user)
+  end
+
   context 'when the user exists' do
     context 'and the user is confirmed' do
       it 'send a message to the user' do
-        params = { email: 'confirmed@jamtastic.org' }
+        params = { email: 'confirmed-test@jamtastic.org' }
 
         post(user_confirmation_path, params:)
 
         message = ActionMailer::Base.deliveries.last
 
-        expect(message.to.join).to eq('confirmed@jamtastic.org')
+        expect(message.to.join).to eq('confirmed-test@jamtastic.org')
       end
 
       it 'sends the confirmation instructions to the user' do
-        params = { email: 'confirmed@jamtastic.org' }
+        params = { email: 'confirmed-test@jamtastic.org' }
 
         post(user_confirmation_path, params:)
 
@@ -26,7 +31,7 @@ RSpec.describe 'Send email confirmation message' do
       end
 
       it 'returns a sucess' do
-        params = { email: 'confirmed@jamtastic.org' }
+        params = { email: 'confirmed-test@jamtastic.org' }
         post(user_confirmation_path, params:)
 
         response_body = response.parsed_body
@@ -35,7 +40,7 @@ RSpec.describe 'Send email confirmation message' do
       end
 
       it 'returns a confirmation message' do
-        params = { email: 'confirmed@jamtastic.org' }
+        params = { email: 'confirmed-test@jamtastic.org' }
         post(user_confirmation_path, params:)
 
         response_body = response.parsed_body
@@ -49,17 +54,17 @@ RSpec.describe 'Send email confirmation message' do
 
     context 'and the user is unconfirmed' do
       it 'sends an message to the user' do
-        params = { email: 'unconfirmed@jamtastic.org' }
+        params = { email: 'unconfirmed-test@jamtastic.org' }
 
         post(user_confirmation_path, params:)
 
         message = ActionMailer::Base.deliveries.last
 
-        expect(message.to.join).to eq('unconfirmed@jamtastic.org')
+        expect(message.to.join).to eq('unconfirmed-test@jamtastic.org')
       end
 
       it 'sends the confirmation instructions to the user' do
-        params = { email: 'unconfirmed@jamtastic.org' }
+        params = { email: 'unconfirmed-test@jamtastic.org' }
 
         post(user_confirmation_path, params:)
 
@@ -69,7 +74,7 @@ RSpec.describe 'Send email confirmation message' do
       end
 
       it 'returns a sucess' do
-        params = { email: 'confirmed@jamtastic.org' }
+        params = { email: 'confirmed-test@jamtastic.org' }
         post(user_confirmation_path, params:)
 
         response_body = response.parsed_body
@@ -78,7 +83,7 @@ RSpec.describe 'Send email confirmation message' do
       end
 
       it 'returns a confirmation message' do
-        params = { email: 'confirmed@jamtastic.org' }
+        params = { email: 'confirmed-test@jamtastic.org' }
         post(user_confirmation_path, params:)
 
         response_body = response.parsed_body

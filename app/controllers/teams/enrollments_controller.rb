@@ -13,12 +13,12 @@ module Teams
       if team_member.persisted?
         render(json: EnrollmentsSerializer.render(team_member), status: :created)
       else
-        render(json: Models::ErrorsSerializer.render(team_member), status: :unprocessable_entity)
+        render(json: Models::ErrorsSerializer.render(team_member), status: :unprocessable_content)
       end
     rescue JoinTeam::AlreadyAMember
       error_message = I18n.t('enrollments.errors.already_a_member')
 
-      render(json: ErrorSerializer.render(error_message), status: :unprocessable_entity)
+      render(json: ErrorSerializer.render(error_message), status: :unprocessable_content)
     end
 
     def destroy
@@ -32,11 +32,11 @@ module Teams
     rescue RemoveEnrollment::CantRemoveAdminError
       error_message = I18n.t('enrollments.errors.cant_remove_admin')
 
-      render(json: ErrorSerializer.render(error_message), status: :unprocessable_entity)
+      render(json: ErrorSerializer.render(error_message), status: :unprocessable_content)
     rescue RemoveEnrollment::CantRemoveOthersError
       error_message = I18n.t('enrollments.errors.cant_remove_others')
 
-      render(json: ErrorSerializer.render(error_message), status: :unprocessable_entity)
+      render(json: ErrorSerializer.render(error_message), status: :unprocessable_content)
     end
   end
 end

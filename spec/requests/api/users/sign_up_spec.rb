@@ -3,6 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe 'Sign up a user' do
+  before do
+    create(:art_skill)
+    create(:code_skill)
+  end
+
   let(:params) do
     {
       name: 'Adam Sandler',
@@ -94,7 +99,7 @@ RSpec.describe 'Sign up a user' do
 
       post(user_registration_path, params:)
 
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
   end
 end

@@ -1,0 +1,51 @@
+# Jamtastic API Project Configuration
+# This file contains project metadata and configuration
+
+PROJECT_NAME="Jamtastic API"
+PROJECT_VERSION="1.0.0"
+PROJECT_DESCRIPTION="RESTful JSON API for team management and skill tracking"
+PROJECT_URL="https://github.com/jamtasticgd/jamtastic-api"
+
+# Technology Stack
+RUBY_VERSION=">=3.2.2"
+RAILS_VERSION="7.0.5"
+DATABASE_DEV="SQLite"
+DATABASE_PROD="PostgreSQL"
+
+# Development
+DEV_SERVER_PORT="3000"
+DEV_SERVER_HOST="localhost"
+
+# Documentation
+DOCS_DIR="docs"
+SCRIPTS_DIR="scripts"
+
+# Key Directories
+APP_DIR="app"
+CONFIG_DIR="config"
+DB_DIR="db"
+PUBLIC_DIR="public"
+SPEC_DIR="spec"
+TMP_DIR="tmp"
+VENDOR_DIR="vendor"
+
+# Asset Directories
+LOGOS_DIR="public/logos"
+ICONS_DIR="public/icons"
+
+# Development Scripts
+DEV_SCRIPT="scripts/dev.sh"
+START_SCRIPT="scripts/start_dev.sh"
+STOP_SCRIPT="scripts/stop_dev.sh"
+
+# Test Configuration
+TEST_FRAMEWORK="RSpec"
+TEST_COVERAGE="true"
+
+# Code Quality
+LINTER="RuboCop"
+SECURITY_AUDIT="bundle audit"
+
+# Deployment
+DEPLOYMENT_PLATFORM="Fly.io"
+CONTAINER="Docker"

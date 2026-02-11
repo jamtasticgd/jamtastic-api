@@ -17,9 +17,10 @@ gem 'sentry-rails', '~> 5.9'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
-  gem 'dotenv-rails', '~> 3.1'
-  gem 'pry-rails', '~> 0.3'
-  gem 'rspec-rails', '~> 8.0'
+  gem 'dotenv-rails', '~> 2.8.1'
+  gem 'pry-rails', '~> 0.3.9'
+  gem 'rspec-rails', '~> 6.0.3'
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :development do

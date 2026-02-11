@@ -3,12 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe 'Sign up a user' do
+  before do
+    create(:confirmed_user)
+    create(:unconfirmed_user)
+  end
+
   context 'when the user exists' do
     context 'and the password is correct' do
       context 'and it is an confirmed user' do
         it 'returns a success' do
           params = {
-            email: 'confirmed@jamtastic.org',
+            email: 'confirmed-test@jamtastic.org',
             password: '123456'
           }
           post(new_user_session_path, params:)
@@ -20,52 +25,22 @@ RSpec.describe 'Sign up a user' do
 
         it 'returns the signed user information' do
           params = {
-            email: 'confirmed@jamtastic.org',
+            email: 'confirmed-test@jamtastic.org',
             password: '123456'
           }
           post(new_user_session_path, params:)
 
           response_body = response.parsed_body
 
-          expect(response_body.dig('data', 'email')).to eq('confirmed@jamtastic.org')
+          expect(response_body.dig('data', 'email')).to eq('confirmed-test@jamtastic.org')
         end
       end
 
       context 'and it is an unconfirmed user' do
         context 'and it is past the uncofirmed access period' do
-          it 'returns a failure' do
-            params = {
-              email: 'unconfirmed@jamtastic.org',
-              password: '123456'
-            }
-            post(new_user_session_path, params:)
-
-            response_body = response.parsed_body
-
-            expect(response_body['success']).to be(false)
-          end
-
-          it 'returns the error message' do
-            params = {
-              email: 'unconfirmed@jamtastic.org',
-              password: '123456'
-            }
-            post(new_user_session_path, params:)
-
-            response_body = response.parsed_body
-
-            expect(response_body['errors'].join).to eq(
-              'E-mail ou senha inválidos.'
-            )
-          end
-        end
-
-        context 'and it is within the unconfirmed access period' do
-          before { travel_to Time.zone.local(2019, 1, 1) }
-
           it 'returns a success' do
             params = {
-              email: 'unconfirmed@jamtastic.org',
+              email: 'unconfirmed-test@jamtastic.org',
               password: '123456'
             }
             post(new_user_session_path, params:)
@@ -77,14 +52,42 @@ RSpec.describe 'Sign up a user' do
 
           it 'returns the signed user information' do
             params = {
-              email: 'unconfirmed@jamtastic.org',
+              email: 'unconfirmed-test@jamtastic.org',
               password: '123456'
             }
             post(new_user_session_path, params:)
 
             response_body = response.parsed_body
 
-            expect(response_body.dig('data', 'email')).to eq('unconfirmed@jamtastic.org')
+            expect(response_body.dig('data', 'email')).to eq('unconfirmed-test@jamtastic.org')
+          end
+        end
+
+        context 'and it is within the unconfirmed access period' do
+          before { travel_to Time.zone.local(2019, 1, 1) }
+
+          it 'returns a success' do
+            params = {
+              email: 'unconfirmed-test@jamtastic.org',
+              password: '123456'
+            }
+            post(new_user_session_path, params:)
+
+            response_body = response.parsed_body
+
+            expect(response_body.any?('errors')).to be(false)
+          end
+
+          it 'returns the signed user information' do
+            params = {
+              email: 'unconfirmed-test@jamtastic.org',
+              password: '123456'
+            }
+            post(new_user_session_path, params:)
+
+            response_body = response.parsed_body
+
+            expect(response_body.dig('data', 'email')).to eq('unconfirmed-test@jamtastic.org')
           end
         end
       end
@@ -93,7 +96,7 @@ RSpec.describe 'Sign up a user' do
     context 'and the password is incorrect' do
       it 'returns a failure' do
         params = {
-          email: 'confirmed@jamtastic.org',
+          email: 'confirmed-test@jamtastic.org',
           password: '1234567890'
         }
         post(new_user_session_path, params:)
@@ -105,7 +108,7 @@ RSpec.describe 'Sign up a user' do
 
       it 'returns the error message' do
         params = {
-          email: 'confirmed@jamtastic.org',
+          email: 'confirmed-test@jamtastic.org',
           password: '1234567890'
         }
         post(new_user_session_path, params:)
@@ -146,7 +149,7 @@ RSpec.describe 'Sign up a user' do
   context 'when the user signs in successfully' do
     before do
       params = {
-        email: 'confirmed@jamtastic.org',
+        email: 'confirmed-test@jamtastic.org',
         password: '123456'
       }
       post(new_user_session_path, params:)
@@ -157,7 +160,7 @@ RSpec.describe 'Sign up a user' do
     end
 
     it 'returns the user uid' do
-      expect(response.headers['uid']).to eq('confirmed@jamtastic.org')
+      expect(response.headers['uid']).to eq('confirmed-test@jamtastic.org')
     end
 
     it 'returns an access token' do

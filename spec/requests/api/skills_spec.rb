@@ -4,6 +4,14 @@ require 'rails_helper'
 
 RSpec.describe 'Skills' do
   context 'when some skills exist' do
+    before do
+      create(:art_skill)
+      create(:audio_skill)
+      create(:code_skill)
+      create(:game_design_skill)
+      create(:writing_skill)
+    end
+
     it 'returns an ok status' do
       get skills_path
 

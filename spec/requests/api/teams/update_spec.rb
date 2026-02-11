@@ -58,7 +58,7 @@ RSpec.describe 'Update a team' do
       it 'returns an unprocessable entity status code' do
         put team_path(team), params: { id: team.id }, headers: authentication_headers
 
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it 'returns the error message' do
